@@ -67,10 +67,18 @@ public class QuestionGame : MonoBehaviour
     private static readonly int ArrowsKey = Animator.StringToHash("arrows");
     private static readonly int EndKey = Animator.StringToHash("end");
     private static readonly int SizePropertyKey = Shader.PropertyToID("_Size");
+    private static readonly int Answer1FadeKey = Animator.StringToHash("answer1fade");
+    private static readonly int Answer2FadeKey = Animator.StringToHash("answer2fade");
+    private static readonly int Answer3FadeKey = Animator.StringToHash("answer3fade");
+    private static readonly int Answer4FadeKey = Animator.StringToHash("answer4fade");
     
     private static List<int> AnswersKey = new List<int>
     {
         Answer1Key, Answer2Key, Answer3Key, Answer4Key
+    };
+    private static List<int> AnswersFadeKey = new List<int>
+    {
+        Answer1FadeKey, Answer2FadeKey, Answer3FadeKey, Answer4FadeKey
     };
 
     private Material blurMaterial;
@@ -197,6 +205,7 @@ public class QuestionGame : MonoBehaviour
 
     public void SetPlayerChoices(int p1, int p2)
     {
+        // activate selected ones
         if (p1 == p2)
         {
             animator.SetTrigger(AnswersKey[p1]);
@@ -205,6 +214,14 @@ public class QuestionGame : MonoBehaviour
         {
             animator.SetTrigger(AnswersKey[p1]);
             animator.SetTrigger(AnswersKey[p2]);
+        }
+        // fade others
+        for (int i = 0; i < 4; i++)
+        {
+            if (i != p1 && i != p2)
+            {
+                animator.SetTrigger(AnswersFadeKey[i]);
+            }
         }
         player1Arrow.rotation = Quaternion.Euler(0f, 0f, - p1 * 90f);
         player2Arrow.rotation = Quaternion.Euler(0f, 0f, - p2 * 90f);

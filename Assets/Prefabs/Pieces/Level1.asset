@@ -15,3 +15,4 @@ MonoBehaviour:
   roadPieces:
   - {fileID: 368096033905097058, guid: dad8e4b5cec6b5145a81a49724166221, type: 3}
   - {fileID: 4377313843559935652, guid: ef7bdc911c0983944ae441ad24259755, type: 3}
+  - {fileID: 521724507652790312, guid: f51315f9a9b75c44fb04cefb4b1259e6, type: 3}

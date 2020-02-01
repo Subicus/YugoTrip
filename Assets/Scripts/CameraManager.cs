@@ -10,6 +10,8 @@ public class CameraManager : MonoBehaviour
     public float advanceMult = 2;
     public float maxRange = 50;
 
+    public float smoothMult = 1;
+
     Vector3 followPosition;
     Vector3 followPositionSmoothVelo;
 
@@ -62,7 +64,7 @@ public class CameraManager : MonoBehaviour
             targetPosition /= multipleTargets.Count + 1;
         }
 
-        followPosition = Vector3.SmoothDamp(followPosition, targetPosition, ref followPositionSmoothVelo, 1);
+        followPosition = Vector3.SmoothDamp(followPosition, targetPosition, ref followPositionSmoothVelo, smoothMult);
 
         transform.position = followPosition - transform.forward * distance;
     }

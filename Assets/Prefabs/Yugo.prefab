@@ -108,11 +108,14 @@ MonoBehaviour:
   steeredWheels:
   - {fileID: 2475525774830326706}
   - {fileID: 2475525776077011236}
-  handbrakeWheels: []
+  handbrakeWheels:
+  - {fileID: 2475525774944753407}
+  - {fileID: 2475525774874344756}
   maxAccelTorque: 1000
   maxBrakeTorque: 1000
   maxhandbrakeTorque: 10000
   maxSteer: 30
+  maxSpeed: 30
   brakeLightMaterial: {fileID: 0}
   reverseLightMaterial: {fileID: 0}
 --- !u!114 &7391902812197705834

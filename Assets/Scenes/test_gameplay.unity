@@ -1985,8 +1985,8 @@ MonoBehaviour:
   questionGame: {fileID: 1440377493}
   cameraManager: {fileID: 1388128995}
   partsManager: {fileID: 249330872}
-  MinTimeForQuestion: 30
-  MaxTimeForQuestion: 60
+  MinTimeForQuestion: 25
+  MaxTimeForQuestion: 45
   InitialTimeForQuestion: 10
 --- !u!4 &1257644837
 Transform:

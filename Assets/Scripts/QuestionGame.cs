@@ -105,7 +105,7 @@ public class QuestionGame : MonoBehaviour
         canvasGroup.alpha = 0f;
     }
 
-    public void StartNewGame()
+    public void StartNewGame(float duration = 3f)
     {
         if (shouldBeReset)
         {
@@ -115,7 +115,7 @@ public class QuestionGame : MonoBehaviour
         StopAllCoroutines();
         canvasGroup.alpha = 0f;
         endCanvas.alpha = 0f;
-        ShowQuestion(questionLoader.GetRandomQuestion(), 3f);
+        ShowQuestion(questionLoader.GetRandomQuestion(), duration);
     }
 
     private void Update()

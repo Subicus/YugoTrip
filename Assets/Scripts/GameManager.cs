@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
             if (timeForQuestion <= 0f)
             {
                 State = GameState.Questions;
-                questionGame.StartNewGame();
+                questionGame.StartNewGame(5f);
             }
         }
     }

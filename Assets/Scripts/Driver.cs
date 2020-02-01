@@ -13,6 +13,8 @@ public class Driver : MonoBehaviour
     public float maxhandbrakeTorque = 10000;
     public float maxSteer = 30;
 
+    public float maxSpeed = 30;
+
     Rigidbody rb;
 
     public Material brakeLightMaterial;
@@ -59,6 +61,9 @@ public class Driver : MonoBehaviour
 
             reverseLightIntensity = 1;
         }
+
+        if (rb.velocity.magnitude > maxSpeed)
+            accelInput = 0;
 
         if (brake > 0.5f)
             brakeLightIntensity = 1;

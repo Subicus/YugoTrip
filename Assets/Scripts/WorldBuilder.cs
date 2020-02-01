@@ -5,11 +5,10 @@ using UnityEngine;
 public class WorldBuilder : MonoBehaviour
 {
     public LevelData level;
+    public int pieceCount = 20;
 
     void Start()
     {
-        int pieceCount = 10;
-
         Transform prevTransformPivot = transform;
         for (int i = 0; i < pieceCount; i++)
         {

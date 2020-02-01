@@ -56,6 +56,7 @@ public class QuestionGame : MonoBehaviour
     private int player2ChoiceIndex;
 
     private QuestionLoader questionLoader;
+    private bool shouldBeReset;
     
     private static readonly int IntroKey = Animator.StringToHash("intro");
     private static readonly int ResetKey = Animator.StringToHash("reset");
@@ -91,8 +92,13 @@ public class QuestionGame : MonoBehaviour
         canvasGroup.alpha = 0f;
     }
 
-    private void StartNewGame()
+    public void StartNewGame()
     {
+        if (shouldBeReset)
+        {
+            animator.SetTrigger(ResetKey);
+        }
+        shouldBeReset = true;
         StopAllCoroutines();
         canvasGroup.alpha = 0f;
         endCanvas.alpha = 0f;
@@ -101,13 +107,8 @@ public class QuestionGame : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartNewGame();
-        }   
         if (Input.GetKeyDown(KeyCode.R))
         {
-            animator.SetTrigger(ResetKey);
             StartNewGame();
         }
         if (canInput)

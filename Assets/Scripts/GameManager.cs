@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     public float InitialTimeForQuestion;
 
     private float timeForQuestion;
+    private bool isFirstQuestion = true;
     
     public bool IsDriving => State == GameState.Driving;
 
@@ -78,7 +79,8 @@ public class GameManager : MonoBehaviour
             if (timeForQuestion <= 0f)
             {
                 State = GameState.Questions;
-                questionGame.StartNewGame(5f);
+                questionGame.StartNewGame(isFirstQuestion ? 5f : 3f);
+                isFirstQuestion = false;
             }
         }
     }

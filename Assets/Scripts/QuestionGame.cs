@@ -206,8 +206,8 @@ public class QuestionGame : MonoBehaviour
             animator.SetTrigger(AnswersKey[p1]);
             animator.SetTrigger(AnswersKey[p2]);
         }
-        player1Arrow.rotation = Quaternion.Euler(0f, 0f, -180f - p1 * 90f);
-        player2Arrow.rotation = Quaternion.Euler(0f, 0f, -180f - p2 * 90f);
+        player1Arrow.rotation = Quaternion.Euler(0f, 0f, - p1 * 90f);
+        player2Arrow.rotation = Quaternion.Euler(0f, 0f, - p2 * 90f);
         animator.SetTrigger(ArrowsKey);
 
         DoEndAnimation(p1 == p2);

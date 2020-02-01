@@ -31,7 +31,14 @@ public class QuestionGame : MonoBehaviour
 
     private Animator animator;
     private CanvasGroup canvasGroup;
+    
+    
     private static readonly int IntroKey = Animator.StringToHash("intro");
+    private static readonly int ResetKey = Animator.StringToHash("reset");
+    private static readonly int Answer1Key = Animator.StringToHash("answer1");
+    private static readonly int Answer2Key = Animator.StringToHash("answer2");
+    private static readonly int Answer3Key = Animator.StringToHash("answer3");
+    private static readonly int Answer4Key = Animator.StringToHash("answer4");
 
     #endregion
 
@@ -97,6 +104,8 @@ public class QuestionGame : MonoBehaviour
         Speedometer.RotationBounceOffset = 0f;
         
         Debug.LogError("TIME FINISHED!");
+        animator.SetTrigger(Answer2Key);
+        animator.SetTrigger(Answer1Key);
     }
 
     #endregion

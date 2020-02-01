@@ -129,7 +129,7 @@ MonoBehaviour:
   - {fileID: 3104052589720847846}
   - {fileID: 6473996823434099201}
   StartHealth: 100
-  HealthDecreasePerSecond: 3
+  HealthDecreasePerSecond: 5
   HealthDecreaseRoughPerSecond: 10
 --- !u!114 &7391902812197705834
 MonoBehaviour:

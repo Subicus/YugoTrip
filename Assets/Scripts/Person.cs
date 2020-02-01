@@ -73,6 +73,24 @@ public class Person : MonoBehaviour
         }
     }
 
+    public void GoOutOfCar()
+    {
+        if (isFirstPlayer)
+        {
+            transform.position = yugo.transform.position + Vector3.left * 2f;
+        }
+        else
+        {
+            transform.position = yugo.transform.position + Vector3.right * 2f;
+        }
+        gameObject.SetActive(true);
+    }
+
+    public void GoInCar()
+    {
+        gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("BrokenPart"))

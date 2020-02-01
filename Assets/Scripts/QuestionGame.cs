@@ -69,18 +69,35 @@ public class QuestionGame : MonoBehaviour
         answer3.text = questionData.Answer3;
         answer4.text = questionData.Answer4;
         Speedometer.RotationNormalized = 1f;
+        Speedometer.RotationBounceOffset = 0.03f;
         
         animator.SetTrigger(IntroKey);
     }
 
+    // called from animation
     public void IntroAnimationFinished()
     {
-        Debug.LogError("INTRO DONE");
+        Debug.Log("Intro animation");
+        StartCoroutine(DropNeedleAnimation());
     }
 
     #endregion
 
     #region Private
+
+    private IEnumerator DropNeedleAnimation()
+    {
+        var v = 0f;
+        while (v <= 1f)
+        {
+            v += Time.unscaledDeltaTime / 5f;
+            Speedometer.RotationNormalized = Mathf.SmoothStep(1f, 0f, v);
+            yield return null;
+        }
+        Speedometer.RotationBounceOffset = 0f;
+        
+        Debug.LogError("TIME FINISHED!");
+    }
 
     #endregion
 }

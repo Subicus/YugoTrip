@@ -542,6 +542,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!225 &2014604223 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 5229667430824752408, guid: 27c63307aba1b4ede946b4d0f3fde155,
+    type: 3}
+  m_PrefabInstance: {fileID: 1914789082404127126}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1914789082404127126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -784,6 +790,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Alpha
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914789084416109096, guid: 27c63307aba1b4ede946b4d0f3fde155,
+        type: 3}
+      propertyPath: MyCanvasGroup
+      value: 
+      objectReference: {fileID: 2014604223}
+    - target: {fileID: 1914789084416109096, guid: 27c63307aba1b4ede946b4d0f3fde155,
+        type: 3}
+      propertyPath: RotationBounceTime
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27c63307aba1b4ede946b4d0f3fde155, type: 3}

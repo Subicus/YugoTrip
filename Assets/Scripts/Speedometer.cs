@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [ExecuteInEditMode]
 public class Speedometer : MonoBehaviour
@@ -15,8 +16,19 @@ public class Speedometer : MonoBehaviour
     [Range(0,1)]
     public float RotationNormalized;
 
+    [Range(0,1)]
+    public float RotationBounceOffset;
+
+    public float RotationBounceTime = 0.1f;
+
     public float MinRotation;
     public float MaxRotation;
+
+    #endregion
+
+    #region Fields
+
+    private float rotationOffset;
 
     #endregion
 
@@ -27,18 +39,32 @@ public class Speedometer : MonoBehaviour
         MyCanvasGroup = GetComponent<CanvasGroup>();
     }
 
+    private void Start()
+    {
+        StartCoroutine(DoBounce());
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+
     public void Update()
     {
-        Needle.rotation = Quaternion.Euler(0f, 0f, Mathf.Lerp(MinRotation,MaxRotation,RotationNormalized));
+        Needle.rotation = Quaternion.Euler(0f, 0f, Mathf.Lerp(MinRotation, MaxRotation, RotationNormalized + rotationOffset));
     }
 
     #endregion
 
-    #region Public
+    #region Private
 
-    public void SetAlpha(float a)
+    private IEnumerator DoBounce()
     {
-        MyCanvasGroup.alpha = a;
+        while (true)
+        {
+            rotationOffset = Random.Range(-RotationBounceOffset, RotationBounceOffset);
+            yield return new WaitForSecondsRealtime(RotationBounceTime);
+        }
     }
 
     #endregion

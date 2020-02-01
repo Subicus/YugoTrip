@@ -20,21 +20,28 @@ public class Driver : MonoBehaviour
     public Material brakeLightMaterial;
     public Material reverseLightMaterial;
 
+    public ParticleSystem smokeParticleSystem;
+    public ParticleSystem explosionParticleSystem;
+    public GameObject[] carObjects;
+
     int emissionId;
+    public bool IsBroken { get; set; }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
 
         emissionId = Shader.PropertyToID("_EmissionColor");
+        smokeParticleSystem.Stop();
     }
 
     void Update()
     {
-        float accelInput = Input.GetAxis("Vertical");
-        float steerInput = Input.GetAxis("Horizontal");
+        var isDriving = GameManager.I.IsDriving;
+        float accelInput = isDriving ? Input.GetAxis("Vertical") : 0;
+        float steerInput = isDriving ? Input.GetAxis("Horizontal") : 0;
 
-        float handbrakeInput = Input.GetKey(KeyCode.Space) ? 1 : 0;
+        float handbrakeInput = isDriving && Input.GetKey(KeyCode.Space) ? 1 : 0;
 
         float accel = 0;
         float brake = 0;
@@ -64,7 +71,12 @@ public class Driver : MonoBehaviour
 
         if (rb.velocity.magnitude > maxSpeed)
             accelInput = 0;
-
+        
+        if (IsBroken)
+        {
+            brake = 1;
+        }
+        
         if (brake > 0.5f)
             brakeLightIntensity = 1;
 
@@ -100,6 +112,34 @@ public class Driver : MonoBehaviour
             float v = reverseLightIntensity * 2;
             Color reverseColor = new Color(v, v, v, 1);
             reverseLightMaterial.SetColor(emissionId, reverseColor);
+        }
+    }
+
+    public void Break()
+    {
+        IsBroken = true;
+        smokeParticleSystem.Play();
+    }
+
+    public void Repair()
+    {
+        IsBroken = false;
+        smokeParticleSystem.Stop();
+    }
+
+    public void Explode()
+    {
+        StartCoroutine(DoExplosion());
+    }
+
+    private IEnumerator DoExplosion()
+    {
+        IsBroken = true;
+        explosionParticleSystem.Play();
+        yield return new WaitForSeconds(0.25f);
+        for (int i = 0; i < carObjects.Length; i++)
+        {
+            carObjects[i].SetActive(false);
         }
     }
 }

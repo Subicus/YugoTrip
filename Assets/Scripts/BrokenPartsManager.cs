@@ -50,23 +50,14 @@ public class BrokenPartsManager : MonoBehaviour
 
         if (requiredNumberOfParts == 0)
         {
-            Debug.LogError("REPAIRED!");
+            GameManager.I.RepairCar();
         }
     }
 
-    #endregion
-
-    #region Private
-
-    private void GenerateBrokenParts(int numberOfParts, int required)
+    public void GenerateBrokenParts(int numberOfParts, int required)
     {
         requiredNumberOfParts = required;
-        // remove old
-        for (int i = 0; i < brokenParts.Count; i++)
-        {
-            Destroy(brokenParts[i]);
-        }
-        brokenParts.Clear();
+        RemoveAllParts();
         
         // add new parts
         var yugoPosition = yugo.transform.position;
@@ -83,6 +74,16 @@ public class BrokenPartsManager : MonoBehaviour
             var offset = Random.insideUnitCircle * Random.Range(MinPower, MaxPower);
             rb.AddForce(new Vector3(offset.x, 0f, offset.y));
         }
+    }
+
+    public void RemoveAllParts()
+    {
+        // remove old
+        for (int i = 0; i < brokenParts.Count; i++)
+        {
+            Destroy(brokenParts[i]);
+        }
+        brokenParts.Clear();
     }
 
     #endregion

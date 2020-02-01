@@ -32,11 +32,16 @@ public class QuestionGame : MonoBehaviour
 
     public Transform player1Arrow;
     public Transform player2Arrow;
+    public Transform player1StaticArrow;
+    public Transform player2StaticArrow;
 
     private Animator animator;
     private CanvasGroup canvasGroup;
     private CanvasGroup player1ArrowCanvas;
     private CanvasGroup player2ArrowCanvas;
+
+    private IEnumerator player1StaticArrowAnimation;
+    private IEnumerator player2StaticArrowAnimation;
 
     private bool canInput;
     private float answerDuration;
@@ -99,15 +104,47 @@ public class QuestionGame : MonoBehaviour
         }
         if (canInput)
         {
-            if (Input.GetKeyDown(KeyCode.W)) player1ChoiceIndex = 0;
-            else if (Input.GetKeyDown(KeyCode.D)) player1ChoiceIndex = 1;
-            else if (Input.GetKeyDown(KeyCode.S)) player1ChoiceIndex = 2;
-            else if (Input.GetKeyDown(KeyCode.A)) player1ChoiceIndex = 3;
-            
-            if (Input.GetKeyDown(KeyCode.UpArrow)) player2ChoiceIndex = 0;
-            else if (Input.GetKeyDown(KeyCode.RightArrow)) player2ChoiceIndex = 1;
-            else if (Input.GetKeyDown(KeyCode.DownArrow)) player2ChoiceIndex = 2;
-            else if (Input.GetKeyDown(KeyCode.LeftArrow)) player2ChoiceIndex = 3;
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                player1ChoiceIndex = 0;
+                DoPlayer1Animation();
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                player1ChoiceIndex = 1;
+                DoPlayer1Animation();
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                player1ChoiceIndex = 2;
+                DoPlayer1Animation();
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                player1ChoiceIndex = 3;
+                DoPlayer1Animation();
+            }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                player2ChoiceIndex = 0;
+                DoPlayer2Animation();
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                player2ChoiceIndex = 1;
+                DoPlayer2Animation();
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                player2ChoiceIndex = 2;
+                DoPlayer2Animation();
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                player2ChoiceIndex = 3;
+                DoPlayer2Animation();
+            }
         }
     }
 
@@ -161,6 +198,46 @@ public class QuestionGame : MonoBehaviour
     #endregion
 
     #region Private
+
+    private void DoPlayer1Animation()
+    {
+        if (player1StaticArrowAnimation != null)
+        {
+            StopCoroutine(player1StaticArrowAnimation);
+        }
+        player1StaticArrowAnimation = DoStaticArrowAnimation(true);
+        StartCoroutine(player1StaticArrowAnimation);
+    }
+    
+    private void DoPlayer2Animation()
+    {
+        if (player2StaticArrowAnimation != null)
+        {
+            StopCoroutine(player2StaticArrowAnimation);
+        }
+        player2StaticArrowAnimation = DoStaticArrowAnimation(false);
+        StartCoroutine(player2StaticArrowAnimation);
+    }
+
+    private IEnumerator DoStaticArrowAnimation(bool isFirstPlayer)
+    {
+        var staticArrow = isFirstPlayer ? player1StaticArrow : player2StaticArrow;
+        var v = 0f;
+        while (v <= 1f)
+        {
+            v += Time.unscaledDeltaTime / 0.1f;
+            staticArrow.localScale = Vector3.one * Mathf.SmoothStep(1f, 1.5f, v);
+            yield return null;
+        }
+        
+        v = 0f;
+        while (v <= 1f)
+        {
+            v += Time.unscaledDeltaTime / 0.1f;
+            staticArrow.localScale = Vector3.one * Mathf.SmoothStep(1.5f, 1f, v);
+            yield return null;
+        }
+    }
 
     private IEnumerator DropNeedleAnimation()
     {

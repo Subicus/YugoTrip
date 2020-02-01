@@ -41,11 +41,19 @@ public class Driver : MonoBehaviour
         smokeParticleSystem.Stop();
 
         health = StartHealth;
+        if (GameManager.I == null)
+        {
+            HealthDecreasePerSecond = HealthDecreaseRoughPerSecond = 0;
+        }
     }
 
     void Update()
     {
-        var isDriving = GameManager.I.IsDriving;
+        var isDriving = true;
+        if (GameManager.I != null)
+        {
+            isDriving = GameManager.I.IsDriving;
+        }
         if (isDriving)
         {
             UpdateHealth();    

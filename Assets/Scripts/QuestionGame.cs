@@ -85,6 +85,14 @@ public class QuestionGame : MonoBehaviour
     private void Start()
     {
         canvasGroup.alpha = 0f;
+        StartNewGame();
+    }
+
+    private void StartNewGame()
+    {
+        StopAllCoroutines();
+        canvasGroup.alpha = 0f;
+        endCanvas.alpha = 0f;
         ShowQuestion(new QuestionData
         {
             Question = "HEY, GET ME MY FAVOURITE CIGARS... ",
@@ -99,18 +107,8 @@ public class QuestionGame : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StopAllCoroutines();
             animator.SetTrigger(ResetKey);
-            canvasGroup.alpha = 0f;
-            endCanvas.alpha = 0f;
-            ShowQuestion(new QuestionData
-            {
-                Question = "HEY, GET ME MY FAVOURITE CIGARS... ",
-                Answer1 = "DRINA NO FILTER",
-                Answer2 = "MARLBRO",
-                Answer3 = "NO SMOKING, PLEASE",
-                Answer4 = "RED APPLE CIGARS",
-            }, 5f);
+            StartNewGame();
         }
         if (canInput)
         {

@@ -15,11 +15,13 @@ public class Person : MonoBehaviour
     private BrokenPart closestBrokenPart;
     private BrokenPart takenBrokenPart;
     private Driver yugo;
+    private BrokenPartsManager partsManager;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         yugo = FindObjectOfType<Driver>();
+        partsManager = FindObjectOfType<BrokenPartsManager>();
     }
 
     private void Update()
@@ -51,7 +53,7 @@ public class Person : MonoBehaviour
                 var distanceToYugo = Vector3.Distance(transform.position, yugo.transform.position);
                 if (distanceToYugo <= minDistanceToYugo)
                 {
-                    Destroy(takenBrokenPart.gameObject);
+                    partsManager.RepairWithPart(takenBrokenPart);
                     takenBrokenPart = null;
                     // TODO: repair Yugo!
                 }

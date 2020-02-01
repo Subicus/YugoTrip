@@ -8,7 +8,6 @@ public class BrokenPartsManager : MonoBehaviour
 {
     #region Properties
 
-    public int NumberOfBrokenParts;
     public float MinPower;
     public float MaxPower;
 
@@ -20,6 +19,7 @@ public class BrokenPartsManager : MonoBehaviour
 
     private Driver yugo;
     private List<GameObject> brokenParts = new List<GameObject>();
+    private int requiredNumberOfParts;
 
     #endregion
 
@@ -34,7 +34,23 @@ public class BrokenPartsManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            GenerateBrokenParts();
+            GenerateBrokenParts(5, 3);
+        }
+    }
+
+    #endregion
+
+    #region Public
+
+    public void RepairWithPart(BrokenPart part)
+    {
+        brokenParts.Remove(part.gameObject);
+        Destroy(part.gameObject);
+        requiredNumberOfParts--;
+
+        if (requiredNumberOfParts == 0)
+        {
+            Debug.LogError("REPAIRED!");
         }
     }
 
@@ -42,8 +58,9 @@ public class BrokenPartsManager : MonoBehaviour
 
     #region Private
 
-    private void GenerateBrokenParts()
+    private void GenerateBrokenParts(int numberOfParts, int required)
     {
+        requiredNumberOfParts = required;
         // remove old
         for (int i = 0; i < brokenParts.Count; i++)
         {
@@ -53,7 +70,7 @@ public class BrokenPartsManager : MonoBehaviour
         
         // add new parts
         var yugoPosition = yugo.transform.position;
-        for (int i = 0; i < NumberOfBrokenParts; i++)
+        for (int i = 0; i < numberOfParts; i++)
         {
             var positionOffset = Random.insideUnitCircle * 3f;
             var position = yugoPosition + new Vector3(positionOffset.x, 2f, positionOffset.y);

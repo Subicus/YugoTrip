@@ -210,7 +210,7 @@ public class QuestionGame : MonoBehaviour
         player2Arrow.rotation = Quaternion.Euler(0f, 0f, - p2 * 90f);
         animator.SetTrigger(ArrowsKey);
 
-        DoEndAnimation(p1 == p2);
+        StartCoroutine(DoEndAnimation(p1 == p2));
     }
 
     // from animation
@@ -286,8 +286,10 @@ public class QuestionGame : MonoBehaviour
         SetPlayerChoices(player1ChoiceIndex, player2ChoiceIndex);
     }
 
-    private void DoEndAnimation(bool isWin)
+    private IEnumerator DoEndAnimation(bool isWin)
     {
+        yield return new WaitForSecondsRealtime(1f);
+        
         endBackImage.color = isWin ? wonColor : lostColor;
         endText.text = isWin ? "RELATIONSHIP REPAIRED!" : "RELATIONSHIP BROKEN!";
         

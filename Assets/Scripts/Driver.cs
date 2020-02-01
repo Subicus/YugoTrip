@@ -20,6 +20,8 @@ public class Driver : MonoBehaviour
     public Material brakeLightMaterial;
     public Material reverseLightMaterial;
 
+    public ParticleSystem smokeParticleSystem;
+
     int emissionId;
     public bool IsBroken { get; set; }
 
@@ -28,6 +30,7 @@ public class Driver : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         emissionId = Shader.PropertyToID("_EmissionColor");
+        smokeParticleSystem.Stop();
     }
 
     void Update()
@@ -114,10 +117,12 @@ public class Driver : MonoBehaviour
     {
         IsBroken = true;
         rb.velocity *= 0.1f;
+        smokeParticleSystem.Play();
     }
 
     public void Repair()
     {
         IsBroken = false;
+        smokeParticleSystem.Stop();
     }
 }

@@ -7,6 +7,7 @@ public class Person : MonoBehaviour
 {
     
     public float speed;
+    public bool isFirstPlayer;
     
     private Rigidbody rb;
 
@@ -17,8 +18,8 @@ public class Person : MonoBehaviour
 
     private void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float h = Input.GetAxis(isFirstPlayer ? "Horizontal" : "Horizontal2");
+        float v = Input.GetAxis(isFirstPlayer ? "Vertical" : "Vertical2");
         
         // Move player relative to camera, but projected to ground
         Vector3 inputV = Vector3.ClampMagnitude(new Vector3(h, v), 1);

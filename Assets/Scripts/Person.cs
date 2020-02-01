@@ -42,7 +42,7 @@ public class Person : MonoBehaviour
 
         float enter;
         groundPlane.Raycast(ray, out enter);
-        Vector3 forceV = ray.GetPoint(enter) * speed;
+        Vector3 forceV = ray.GetPoint(enter) * (speed * Time.deltaTime);
 
         rb.AddForce(forceV);
 

@@ -124,4 +124,21 @@ Odgovori: We got drunk
 	Milan was naked
 	Zoki got arrested
 
+PredPitanje: Can you get me some coffee ?
+Pitanje: What coffee would you like ?
+Odgovori: Black wo/ sugar
+	Black w/ Sugar
+	I don't like coffee
+	Esppresso
+
+PredPitanje: Can you get me a snack ?
+Pitanje: What snack would you like ?
+Odgovori: Chocolate bar
+	Sandwich
+	Peanauts
+	Smoki
+
+
+
+
 

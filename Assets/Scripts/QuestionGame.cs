@@ -35,10 +35,16 @@ public class QuestionGame : MonoBehaviour
     public Transform player1StaticArrow;
     public Transform player2StaticArrow;
 
+    public Image endBackImage;
+    public Text endText;
+    public Color wonColor;
+    public Color lostColor;
+
     private Animator animator;
     private CanvasGroup canvasGroup;
     private CanvasGroup player1ArrowCanvas;
     private CanvasGroup player2ArrowCanvas;
+    private CanvasGroup endCanvas;
 
     private IEnumerator player1StaticArrowAnimation;
     private IEnumerator player2StaticArrowAnimation;
@@ -55,6 +61,7 @@ public class QuestionGame : MonoBehaviour
     private static readonly int Answer3Key = Animator.StringToHash("answer3");
     private static readonly int Answer4Key = Animator.StringToHash("answer4");
     private static readonly int ArrowsKey = Animator.StringToHash("arrows");
+    private static readonly int EndKey = Animator.StringToHash("end");
     
     private static List<int> AnswersKey = new List<int>
     {
@@ -69,6 +76,7 @@ public class QuestionGame : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         canvasGroup = GetComponent<CanvasGroup>();
+        endCanvas = endBackImage.GetComponent<CanvasGroup>();
 
         player1ArrowCanvas = player1Arrow.GetComponent<CanvasGroup>();
         player2ArrowCanvas = player2Arrow.GetComponent<CanvasGroup>();
@@ -91,8 +99,10 @@ public class QuestionGame : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
+            StopAllCoroutines();
             animator.SetTrigger(ResetKey);
             canvasGroup.alpha = 0f;
+            endCanvas.alpha = 0f;
             ShowQuestion(new QuestionData
             {
                 Question = "HEY, GET ME MY FAVOURITE CIGARS... ",
@@ -193,6 +203,8 @@ public class QuestionGame : MonoBehaviour
         player1Arrow.rotation = Quaternion.Euler(0f, 0f, -180f - p1 * 90f);
         player2Arrow.rotation = Quaternion.Euler(0f, 0f, -180f - p2 * 90f);
         animator.SetTrigger(ArrowsKey);
+
+        DoEndAnimation(p1 == p2);
     }
 
     #endregion
@@ -241,6 +253,7 @@ public class QuestionGame : MonoBehaviour
 
     private IEnumerator DropNeedleAnimation()
     {
+        animator.ResetTrigger(ResetKey);
         var v = 0f;
         while (v <= 1f)
         {
@@ -253,6 +266,14 @@ public class QuestionGame : MonoBehaviour
         canInput = false;
         Debug.Log("TIME FINISHED!");
         SetPlayerChoices(player1ChoiceIndex, player2ChoiceIndex);
+    }
+
+    private void DoEndAnimation(bool isWin)
+    {
+        endBackImage.color = isWin ? wonColor : lostColor;
+        endText.text = isWin ? "RELATIONSHIP REPAIRED!" : "RELATIONSHIP BROKEN!";
+        
+        animator.SetTrigger(EndKey);
     }
 
     #endregion

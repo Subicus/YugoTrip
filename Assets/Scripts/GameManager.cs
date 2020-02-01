@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
         Driving,
         Repairing,
         Questions,
+        Exploded
     }
 
     private GameState state;
@@ -50,9 +51,17 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (State == GameState.Driving && Input.GetKeyDown(KeyCode.R))
+        if (State == GameState.Driving)
         {
-            BreakCar();
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                BreakCar();
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                State = GameState.Exploded;
+            }
         }
     }
 
@@ -94,6 +103,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Questions:
                 // TODO:
+                break;
+            case GameState.Exploded:
+                yugo.Explode();
                 break;
         }
     }

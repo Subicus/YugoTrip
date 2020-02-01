@@ -21,6 +21,8 @@ public class Driver : MonoBehaviour
     public Material reverseLightMaterial;
 
     public ParticleSystem smokeParticleSystem;
+    public ParticleSystem explosionParticleSystem;
+    public GameObject[] carObjects;
 
     int emissionId;
     public bool IsBroken { get; set; }
@@ -123,5 +125,21 @@ public class Driver : MonoBehaviour
     {
         IsBroken = false;
         smokeParticleSystem.Stop();
+    }
+
+    public void Explode()
+    {
+        StartCoroutine(DoExplosion());
+    }
+
+    private IEnumerator DoExplosion()
+    {
+        IsBroken = true;
+        explosionParticleSystem.Play();
+        yield return new WaitForSeconds(0.25f);
+        for (int i = 0; i < carObjects.Length; i++)
+        {
+            carObjects[i].SetActive(false);
+        }
     }
 }

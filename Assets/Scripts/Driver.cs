@@ -25,6 +25,11 @@ public class Driver : MonoBehaviour
     public ParticleSystem explosionParticleSystem;
     public GameObject[] carObjects;
 
+    private float health;
+    public float StartHealth;
+    public float HealthDecreasePerSecond;
+    public float HealthDecreaseRoughPerSecond;
+
     int emissionId;
     public bool IsBroken { get; set; }
 
@@ -34,11 +39,18 @@ public class Driver : MonoBehaviour
 
         emissionId = Shader.PropertyToID("_EmissionColor");
         smokeParticleSystem.Stop();
+
+        health = StartHealth;
     }
 
     void Update()
     {
         var isDriving = GameManager.I.IsDriving;
+        if (isDriving)
+        {
+            UpdateHealth();    
+        }
+        
         float accelInput = isDriving ? Input.GetAxis("Vertical") : 0;
         float steerInput = isDriving ? Input.GetAxis("Horizontal") : 0;
 
@@ -124,6 +136,7 @@ public class Driver : MonoBehaviour
 
     public void Repair()
     {
+        health = StartHealth;
         IsBroken = false;
         smokeParticleSystem.Stop();
     }
@@ -149,6 +162,19 @@ public class Driver : MonoBehaviour
         if (other.gameObject.CompareTag("Death"))
         {
             GameManager.I.ExplodeCar();
+        }
+    }
+
+    private void UpdateHealth()
+    {
+        if (health < 0)
+            return;
+        
+        health -= Time.deltaTime * HealthDecreasePerSecond;
+        if (health <= 0)
+        {
+            health = 0f;
+            GameManager.I.BreakCar();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +35,12 @@ public class GameManager : MonoBehaviour
     public CameraManager cameraManager;
     public BrokenPartsManager partsManager;
 
+    public float MinTimeForQuestion;
+    public float MaxTimeForQuestion;
+    public float InitialTimeForQuestion;
+
+    private float timeForQuestion;
+    
     public bool IsDriving => State == GameState.Driving;
 
     #region Initialization
@@ -41,11 +48,14 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         I = this;
+        timeForQuestion = InitialTimeForQuestion;
     }
 
     private void Start()
     {
         State = GameState.Driving;
+        firstPlayer.GoInCar();
+        secondPlayer.GoInCar();
     }
 
 
@@ -61,6 +71,14 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 ExplodeCar();
+            }
+
+            // check for question
+            timeForQuestion -= Time.deltaTime;
+            if (timeForQuestion <= 0f)
+            {
+                State = GameState.Questions;
+                questionGame.StartNewGame();
             }
         }
     }
@@ -84,6 +102,13 @@ public class GameManager : MonoBehaviour
         State = GameState.Exploded;
     }
 
+    public void FinishQuestion()
+    {
+        Time.timeScale = 1f;
+        State = GameState.Driving;
+        timeForQuestion = Random.Range(MinTimeForQuestion, MaxTimeForQuestion);
+    }
+
     #endregion
 
     #region Private
@@ -93,10 +118,13 @@ public class GameManager : MonoBehaviour
         switch (State)
         {
             case GameState.Driving:
-                firstPlayer.GoInCar();
-                secondPlayer.GoInCar();
-                yugo.Repair();
-                partsManager.RemoveAllParts();
+                if (yugo.IsBroken)
+                {
+                    firstPlayer.GoInCar();
+                    secondPlayer.GoInCar();
+                    yugo.Repair();
+                    partsManager.RemoveAllParts();
+                }
                 cameraManager.FollowAdditionalTargets = false;
                 break;
             case GameState.Repairing:
@@ -107,7 +135,7 @@ public class GameManager : MonoBehaviour
                 yugo.Break();
                 break;
             case GameState.Questions:
-                // TODO:
+                Time.timeScale = 0f;
                 break;
             case GameState.Exploded:
                 yugo.Explode();

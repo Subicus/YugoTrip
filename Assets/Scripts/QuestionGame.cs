@@ -284,6 +284,12 @@ public class QuestionGame : MonoBehaviour
             blurMaterial.SetFloat(SizePropertyKey, Mathf.SmoothStep(startValue, endValue, v));
             yield return null;
         }
+
+        // finished everything
+        if (!isBlurred)
+        {
+            GameManager.I.FinishQuestion();
+        }
     }
 
     private IEnumerator DropNeedleAnimation()

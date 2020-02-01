@@ -75,13 +75,16 @@ public class Person : MonoBehaviour
 
     public void GoOutOfCar()
     {
+        var forward = yugo.transform.forward.normalized;
         if (isFirstPlayer)
         {
-            transform.position = yugo.transform.position + Vector3.left * 2f;
+            // left side
+            transform.position = yugo.transform.position - new Vector3(forward.z, forward.y, -forward.x) * 2f;
         }
         else
         {
-            transform.position = yugo.transform.position + Vector3.right * 2f;
+            // right side
+            transform.position = yugo.transform.position + new Vector3(forward.z, forward.y, -forward.x) * 2f;
         }
         gameObject.SetActive(true);
     }

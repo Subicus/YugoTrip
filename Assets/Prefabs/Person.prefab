@@ -124,6 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e47f2fc82c64eee899e08b80594b3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1000
+  speed: 1500
   isFirstPlayer: 1
   minDistanceToYugo: 3

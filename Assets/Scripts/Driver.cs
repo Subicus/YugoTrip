@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -140,6 +141,14 @@ public class Driver : MonoBehaviour
         for (int i = 0; i < carObjects.Length; i++)
         {
             carObjects[i].SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Death"))
+        {
+            GameManager.I.ExplodeCar();
         }
     }
 }

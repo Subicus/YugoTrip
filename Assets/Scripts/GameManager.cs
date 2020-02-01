@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                State = GameState.Exploded;
+                ExplodeCar();
             }
         }
     }
@@ -77,6 +77,11 @@ public class GameManager : MonoBehaviour
     public void RepairCar()
     {
         State = GameState.Driving;
+    }
+    
+    public void ExplodeCar()
+    {
+        State = GameState.Exploded;
     }
 
     #endregion

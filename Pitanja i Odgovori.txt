@@ -66,7 +66,11 @@ PredPitanje: Are where there yet ?
 Pitanje: Are we ?
 Odgovori: Shut up , No (sarcastic), No (polite), No (mean)
 
-PredPitanje: 
+PredPitanje: Remember when Milan threw that party ?
+Pitanje: What happened at the party ?
+Odgovori: We got drunk, We had fun, Milan was naked, Zoki got arrested
+
+PredPitanje:
 Pitanje:
 Odgovori:
 

@@ -53,6 +53,8 @@ public class QuestionGame : MonoBehaviour
     private float answerDuration;
     private int player1ChoiceIndex;
     private int player2ChoiceIndex;
+
+    private QuestionLoader questionLoader;
     
     private static readonly int IntroKey = Animator.StringToHash("intro");
     private static readonly int ResetKey = Animator.StringToHash("reset");
@@ -74,6 +76,7 @@ public class QuestionGame : MonoBehaviour
 
     private void Awake()
     {
+        questionLoader = FindObjectOfType<QuestionLoader>();
         animator = GetComponent<Animator>();
         canvasGroup = GetComponent<CanvasGroup>();
         endCanvas = endBackImage.GetComponent<CanvasGroup>();
@@ -85,7 +88,6 @@ public class QuestionGame : MonoBehaviour
     private void Start()
     {
         canvasGroup.alpha = 0f;
-        StartNewGame();
     }
 
     private void StartNewGame()
@@ -93,18 +95,15 @@ public class QuestionGame : MonoBehaviour
         StopAllCoroutines();
         canvasGroup.alpha = 0f;
         endCanvas.alpha = 0f;
-        ShowQuestion(new QuestionData
-        {
-            Question = "HEY, GET ME MY FAVOURITE CIGARS... ",
-            Answer1 = "DRINA NO FILTER",
-            Answer2 = "MARLBRO",
-            Answer3 = "NO SMOKING, PLEASE",
-            Answer4 = "RED APPLE CIGARS",
-        }, 5f);
+        ShowQuestion(questionLoader.GetRandomQuestion(), 5f);
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartNewGame();
+        }   
         if (Input.GetKeyDown(KeyCode.R))
         {
             animator.SetTrigger(ResetKey);

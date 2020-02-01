@@ -124,7 +124,4 @@ Odgovori: We got drunk
 	Milan was naked
 	Zoki got arrested
 
-PredPitanje:
-Pitanje:
-Odgovori:
 

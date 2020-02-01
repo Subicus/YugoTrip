@@ -120,7 +120,7 @@ public class QuestionGame : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             StartNewGame();
         }

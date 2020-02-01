@@ -65,7 +65,7 @@ public class BrokenPartsManager : MonoBehaviour
         {
             var positionOffset = Random.insideUnitCircle * 3f;
             var position = yugoPosition + new Vector3(positionOffset.x, 2f, positionOffset.y);
-            var brokenPart = Instantiate(BrokenPartsPrefabs[Random.Range(0, BrokenPartsPrefabs.Length)], 
+            var brokenPart = Instantiate(BrokenPartsPrefabs[i % BrokenPartsPrefabs.Length], 
                 position, Random.rotation, transform );
             brokenParts.Add(brokenPart);
             

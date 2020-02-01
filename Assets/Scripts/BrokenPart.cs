@@ -7,12 +7,12 @@ public class BrokenPart : MonoBehaviour
 {
     public Color selected1Color;
     public Color selected2Color;
-    public Color normalColor;
     
     private Renderer myRenderer;
     private Rigidbody rb;
 
     private Transform initialParent;
+    private Color normalColor;
 
     private enum State
     {
@@ -32,7 +32,7 @@ public class BrokenPart : MonoBehaviour
     private void Start()
     {
         initialParent = transform.parent;
-        myRenderer.material.color = normalColor;
+        normalColor = myRenderer.material.color;
     }
 
     public void SetSelected(bool isSelected, bool isFirstPlayer)

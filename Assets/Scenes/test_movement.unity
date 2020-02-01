@@ -165,7 +165,10 @@ MonoBehaviour:
   MinPower: 500
   MaxPower: 750
   BrokenPartsPrefabs:
-  - {fileID: 4242667895240355020, guid: 115a242a7f3d64b5fb7a2f6a320eae50, type: 3}
+  - {fileID: 610237727049940214, guid: ba415edd898c04fa493e6045b135dcd9, type: 3}
+  - {fileID: 6485074248030499584, guid: 97f638c587cb54639a80176654c888d4, type: 3}
+  - {fileID: 8594378112483373547, guid: e5929c3e7f34540a6bb465721c64c14a, type: 3}
+  - {fileID: 4350223780293474712, guid: fc7901427f4cc4a0ca4933140a7bc426, type: 3}
 --- !u!4 &419833118
 Transform:
   m_ObjectHideFlags: 0

@@ -169,7 +169,14 @@ public class Driver : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Death"))
         {
-            GameManager.I.ExplodeCar();
+            if (GameManager.I != null)
+            {
+                GameManager.I.ExplodeCar(); 
+            }
+            else
+            {
+                Explode();
+            }
         }
     }
 

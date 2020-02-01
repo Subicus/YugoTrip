@@ -13,6 +13,7 @@ public class CameraManager : MonoBehaviour
     Vector3 followPosition;
     Vector3 followPositionSmoothVelo;
 
+    public bool FollowAdditionalTargets;
     public List<Transform> multipleTargets;
     
     List<Rigidbody> targetRbs;
@@ -40,7 +41,7 @@ public class CameraManager : MonoBehaviour
 
         Vector3 addedVelocity = targetVelocity * advanceMult;
         addedVelocity = Vector3.ClampMagnitude(addedVelocity, maxRange);
-        if (targetRbs != null)
+        if (FollowAdditionalTargets && targetRbs != null)
         {
             for (int i = 0; i < targetRbs.Count; i++)
             {
@@ -52,7 +53,7 @@ public class CameraManager : MonoBehaviour
         }
         
         Vector3 targetPosition = target.position + addedVelocity;
-        if (multipleTargets != null)
+        if (FollowAdditionalTargets && multipleTargets != null)
         {
             for (int i = 0; i < multipleTargets.Count; i++)
             {

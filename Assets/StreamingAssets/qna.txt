@@ -1,76 +1,127 @@
 PredPitanje: Want to drink something ?
 Pitanje: What's my favorite alcohol drink?
-Odgovori: Jack Douglass, Rubin, Kum, Rakija
+Odgovori: Jack Douglass
+	Rubin
+	Kum
+	Rakija
 
 PredPitanje: Can you get me my favorite smokes ?
 Pitanje: What's my favorite smoke?
-Odgovori: Malbobro, Drina wo/ filter, Red Apple, Super Filter
+Odgovori: Malbobro
+	Drina wo/ filter
+	Red Apple
+	Super Filter
 
 PredPitanje: Do you remember how you met my mother ? 
 Pitanje: How did you meet the mother ?
-Odgovori: Drunk, Sober, Naked, Drunk & Naked
+Odgovori: Drunk
+	Sober
+	Naked
+	Drunk & Naked
 
 PredPitanje: Do you remember our first date ?
-Pitanje: Where did you take her out?	
-Odgovori: Restaurant, Concert, Bar, My place
+Pitanje: Where did you go out?	
+Odgovori: Restaurant
+	Concert
+	Bar
+	My place
 
 PredPitanje: Do you remember where we first kissed ?
 Pitanje: Do you remember where we first kissed ?
-Odgovori: Toilet of the Bar, Ljubica's Party, Savomir's Sleepover, White Button's Concert
+Odgovori: Toilet of the Bar
+	Ljubica's Party
+	Savomir's Sleepover
+	White Button's Concert
 
 Pred Pitanje:Remember that concert we went to?
 Pitanje: What was the band playing ?	
-Odgovori: White Button, Bayaga, Cold Beer, Fish Broth
+Odgovori: White Button
+	Bayaga
+	Cold Beer
+	Fish Broth
 
 PredPitanje: Do you remember what day it is today ?
 Pitanje: Do you remember what day it is today ?
-Odgovori: Your mothers birthday, 100th birthday of Nikola Tesla, Our anniversery, (Random Date)
+Odgovori: Your mothers birthday
+	100th birthday of Nikola Tesla
+	Our anniversery
+	(Random Date)
 
 Pred Pitanje: Remember when we ate cakes at that bakery?
 Pitanje: What was the bakery's name?
-Odgovori:  Milutin's, Heart Bakery, Redcaffe, Bread and Crossants
+Odgovori: Milutin's
+	Heart Bakery
+	Redcaffe
+	Bread and Crossants
 
 PredPitanje: It's almost time, you know right ?
 Pitanje: Time for what?
-Odgovori:Smoke Break, Drink Break, Toilet Time, Break Time
+Odgovori:Smoke Break
+	Drink Break
+	Toilet Time
+	Break Time
 
 PredPitanje: Remember when grandma made sweets that time?
 Pitanje: What did grandma make?
-Odgovori: Princess Dough, Fruit Cake, Slatko, Ajvar
+Odgovori: Princess Dough
+	Fruit Cake
+	Slatko
+	Ajvar
 
 PredPitanje: Remember when we went to that expensive restaurant once ?
 Pitanje: What did you eat there ?
-Odgovori: Smoked Cod, Sarma, Greatest Beans Ever, Podvarak
+Odgovori: Smoked Cod
+	Sarma
+	Greatest Beans Ever
+	Podvarak
 
 PredPitanje: Remember when they caught as smoking for the first time ?
 Pitanje: Who caught us?
-Odgovori: Teacher, Your Mother, My Brother, Milutin
+Odgovori: Teacher
+	Your Mother
+	My Brother
+	Milutin
 
 PredPitanje: You remember when my dog bit you?
 Pitanje:What was the dogs name ?
-Odgovori: Žuća, Milutin, Peca, Miki
+Odgovori: Žuća
+	Milksa
+	Peca
+	Miki
 
 PredPitanje: Remember when you hit that musician because you were annoyed ?
 Pitanje: What instrument was he playing ?
-Odgovori: Accordion, Drums, Flute, He was singing
+Odgovori: Accordion
+	Drums
+	Flute
+	He was singing
 
 PredPitanje: Remember when Miroslav dated that girl ?
 Pitanje: What  was the girls name ?
-Odgovori: Ljubljanka, Pekica, Seki, Saša
+Odgovori: Ljubljanka
+	Pekica
+	Seki
+	Saša
 
 PredPitanje: Why do you love me ?
 Pitanje: What makes you stay together ?
-Odgovori: Your smile, Your personality, Your body, Your cooking
+Odgovori: Your smile
+	Your personality
+	Your body
+	Your cooking
 
 PredPitanje: Are where there yet ?
 Pitanje: Are we ?
-Odgovori: Shut up , No (sarcastic), No (polite), No (mean)
+Odgovori: Shut up 
+	No (sarcastic)
+	No (polite)
+	No (mean)
 
 PredPitanje: Remember when Milan threw that party ?
 Pitanje: What happened at the party ?
-Odgovori: We got drunk, We had fun, Milan was naked, Zoki got arrested
+Odgovori: We got drunk
+	We had fun
+	Milan was naked
+	Zoki got arrested
 
-PredPitanje:
-Pitanje:
-Odgovori:
 

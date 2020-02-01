@@ -34,6 +34,7 @@ public class QuestionGame : MonoBehaviour
     public Transform player2Arrow;
     public Transform player1StaticArrow;
     public Transform player2StaticArrow;
+    public AnimationCurve staticArrowAnimation;
 
     public Image endBackImage;
     public Text endText;
@@ -53,6 +54,9 @@ public class QuestionGame : MonoBehaviour
     private float answerDuration;
     private int player1ChoiceIndex;
     private int player2ChoiceIndex;
+
+    private QuestionLoader questionLoader;
+    private bool shouldBeReset;
     
     private static readonly int IntroKey = Animator.StringToHash("intro");
     private static readonly int ResetKey = Animator.StringToHash("reset");
@@ -62,11 +66,14 @@ public class QuestionGame : MonoBehaviour
     private static readonly int Answer4Key = Animator.StringToHash("answer4");
     private static readonly int ArrowsKey = Animator.StringToHash("arrows");
     private static readonly int EndKey = Animator.StringToHash("end");
+    private static readonly int SizePropertyKey = Shader.PropertyToID("_Size");
     
     private static List<int> AnswersKey = new List<int>
     {
         Answer1Key, Answer2Key, Answer3Key, Answer4Key
     };
+
+    private Material blurMaterial;
 
     #endregion
 
@@ -74,43 +81,40 @@ public class QuestionGame : MonoBehaviour
 
     private void Awake()
     {
+        questionLoader = FindObjectOfType<QuestionLoader>();
         animator = GetComponent<Animator>();
         canvasGroup = GetComponent<CanvasGroup>();
         endCanvas = endBackImage.GetComponent<CanvasGroup>();
 
         player1ArrowCanvas = player1Arrow.GetComponent<CanvasGroup>();
         player2ArrowCanvas = player2Arrow.GetComponent<CanvasGroup>();
+
+        blurMaterial = GetComponent<Image>().material;
     }
 
     private void Start()
     {
         canvasGroup.alpha = 0f;
-        ShowQuestion(new QuestionData
+    }
+
+    public void StartNewGame()
+    {
+        if (shouldBeReset)
         {
-            Question = "HEY, GET ME MY FAVOURITE CIGARS... ",
-            Answer1 = "DRINA NO FILTER",
-            Answer2 = "MARLBRO",
-            Answer3 = "NO SMOKING, PLEASE",
-            Answer4 = "RED APPLE CIGARS",
-        }, 5f);
+            animator.SetTrigger(ResetKey);
+        }
+        shouldBeReset = true;
+        StopAllCoroutines();
+        canvasGroup.alpha = 0f;
+        endCanvas.alpha = 0f;
+        ShowQuestion(questionLoader.GetRandomQuestion(), 3f);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StopAllCoroutines();
-            animator.SetTrigger(ResetKey);
-            canvasGroup.alpha = 0f;
-            endCanvas.alpha = 0f;
-            ShowQuestion(new QuestionData
-            {
-                Question = "HEY, GET ME MY FAVOURITE CIGARS... ",
-                Answer1 = "DRINA NO FILTER",
-                Answer2 = "MARLBRO",
-                Answer3 = "NO SMOKING, PLEASE",
-                Answer4 = "RED APPLE CIGARS",
-            }, 5f);
+            StartNewGame();
         }
         if (canInput)
         {
@@ -177,6 +181,8 @@ public class QuestionGame : MonoBehaviour
         player1ArrowCanvas.alpha = player2ArrowCanvas.alpha = 0f;
         
         animator.SetTrigger(IntroKey);
+        StartCoroutine(DoBlurAnimation(true));
+        
         canInput = true;
         player1ChoiceIndex = Random.Range(0, 3);
         player2ChoiceIndex = Random.Range(0, 3);
@@ -205,6 +211,12 @@ public class QuestionGame : MonoBehaviour
         animator.SetTrigger(ArrowsKey);
 
         DoEndAnimation(p1 == p2);
+    }
+
+    // from animation
+    public void FadeOutBlur()
+    {
+        StartCoroutine(DoBlurAnimation(false));
     }
 
     #endregion
@@ -237,16 +249,22 @@ public class QuestionGame : MonoBehaviour
         var v = 0f;
         while (v <= 1f)
         {
-            v += Time.unscaledDeltaTime / 0.1f;
-            staticArrow.localScale = Vector3.one * Mathf.SmoothStep(1f, 1.5f, v);
+            v += Time.unscaledDeltaTime / 0.3f;
+            staticArrow.localScale = Vector3.one * staticArrowAnimation.Evaluate(v);
             yield return null;
         }
-        
-        v = 0f;
+    }
+
+    private IEnumerator DoBlurAnimation(bool isBlurred)
+    {
+        var startValue = isBlurred ? 0f : 20f;
+        var endValue = isBlurred ? 20f : 0f;
+        var duration = isBlurred ? 1f : 0.3f;
+        var v = 0f;
         while (v <= 1f)
         {
-            v += Time.unscaledDeltaTime / 0.1f;
-            staticArrow.localScale = Vector3.one * Mathf.SmoothStep(1.5f, 1f, v);
+            v += Time.unscaledDeltaTime / duration;
+            blurMaterial.SetFloat(SizePropertyKey, Mathf.SmoothStep(startValue, endValue, v));
             yield return null;
         }
     }

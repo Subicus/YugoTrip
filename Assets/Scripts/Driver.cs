@@ -116,7 +116,6 @@ public class Driver : MonoBehaviour
     public void Break()
     {
         IsBroken = true;
-        rb.velocity *= 0.1f;
         smokeParticleSystem.Play();
     }
 

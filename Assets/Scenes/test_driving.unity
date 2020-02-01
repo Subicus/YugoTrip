@@ -3007,41 +3007,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2475525774686184818, guid: 937b334be7c5ce34ea006955f58ded75,
-        type: 3}
-      propertyPath: maxSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2475525774686184818, guid: 937b334be7c5ce34ea006955f58ded75,
-        type: 3}
-      propertyPath: maxBrakeTorque
-      value: 8000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2475525774830326706, guid: 937b334be7c5ce34ea006955f58ded75,
-        type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2475525774874344756, guid: 937b334be7c5ce34ea006955f58ded75,
-        type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2475525774944753407, guid: 937b334be7c5ce34ea006955f58ded75,
-        type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2475525776077011236, guid: 937b334be7c5ce34ea006955f58ded75,
-        type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4745306121720033648, guid: 937b334be7c5ce34ea006955f58ded75,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.472
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 937b334be7c5ce34ea006955f58ded75, type: 3}
 --- !u!4 &2635765778378994120

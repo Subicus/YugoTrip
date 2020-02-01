@@ -113,10 +113,10 @@ MonoBehaviour:
   - {fileID: 2475525774944753407}
   - {fileID: 2475525774874344756}
   maxAccelTorque: 1000
-  maxBrakeTorque: 1000
+  maxBrakeTorque: 8000
   maxhandbrakeTorque: 10000
   maxSteer: 30
-  maxSpeed: 30
+  maxSpeed: 10
   brakeLightMaterial: {fileID: 0}
   reverseLightMaterial: {fileID: 0}
   smokeParticleSystem: {fileID: 5091162506496710972}
@@ -187,7 +187,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
@@ -262,7 +262,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
@@ -337,7 +337,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
@@ -505,7 +505,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
@@ -676,7 +676,7 @@ PrefabInstance:
     - target: {fileID: 7169839824778447209, guid: e834d6bc29b87a04c81b2bd789369373,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 1.472
       objectReference: {fileID: 0}
     - target: {fileID: 7169839824778447209, guid: e834d6bc29b87a04c81b2bd789369373,
         type: 3}

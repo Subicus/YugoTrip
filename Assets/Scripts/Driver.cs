@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Driver : MonoBehaviour
 {
@@ -33,12 +35,19 @@ public class Driver : MonoBehaviour
     public float HealthDecreasePerSecond;
     public float HealthDecreaseRoughPerSecond;
 
+    public Text cloudText;
+    private CanvasGroup cloudCanvasGroup;
+    public Transform worldCanvas;
+    private IEnumerator cloudAnimation;
+
     int emissionId;
     public bool IsBroken { get; set; }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        cloudCanvasGroup = cloudText.GetComponent<CanvasGroup>();
+        cloudCanvasGroup.alpha = 0f;
 
         emissionId = Shader.PropertyToID("_EmissionColor");
         smokeParticleSystem.Stop();
@@ -50,6 +59,8 @@ public class Driver : MonoBehaviour
         }
 
         initialSasijaMaterijalColor = sasijaMaterijal.color;
+
+        ShowCloud("LET'S GO!", 3f, 2f);
     }
 
     private void OnDestroy()
@@ -144,12 +155,16 @@ public class Driver : MonoBehaviour
             Color reverseColor = new Color(v, v, v, 1);
             reverseLightMaterial.SetColor(emissionId, reverseColor);
         }
+        
+        // refresh the ui depending on camera
+        worldCanvas.rotation = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);
     }
 
     public void Break()
     {
         IsBroken = true;
         smokeParticleSystem.Play();
+        ShowCloud("REPAIR IT!");
     }
 
     public void Repair()
@@ -157,6 +172,14 @@ public class Driver : MonoBehaviour
         health = StartHealth;
         IsBroken = false;
         smokeParticleSystem.Stop();
+
+        var repairedStrings = new List<string>
+        {
+            "STILL THE BEST CAR",
+            "AMAZING CAR!",
+            "YUGO IS THE BEST!",
+        };
+        ShowCloud(repairedStrings[Random.Range(0, repairedStrings.Count)]);
     }
 
     public void Explode()
@@ -202,6 +225,41 @@ public class Driver : MonoBehaviour
         {
             health = 0f;
             GameManager.I.BreakCar();
+        }
+    }
+
+    public void ShowCloud(string text, float duration = 5f, float delay = 0f)
+    {
+        if (cloudAnimation != null)
+        {
+            StopCoroutine(cloudAnimation);
+        }
+        cloudAnimation = AnimateCloud(text, duration, delay);
+        StartCoroutine(cloudAnimation);
+    }
+
+    private IEnumerator AnimateCloud(string text, float duration, float delay = 0f)
+    {
+        cloudText.text = text;
+        cloudCanvasGroup.alpha = 0f;
+        yield return new WaitForSeconds(delay);
+        
+        var v = 0f;
+        while (v <= 1f)
+        {
+            v += Time.deltaTime / 0.4f;
+            cloudCanvasGroup.alpha = Mathf.SmoothStep(0f, 1f, v);
+            yield return null;
+            
+        }
+        yield return new WaitForSeconds(duration);
+        
+        v = 0f;
+        while (v <= 1f)
+        {
+            v += Time.deltaTime / 0.4f;
+            cloudCanvasGroup.alpha = Mathf.SmoothStep(1f, 0f, v);
+            yield return null;
         }
     }
 }

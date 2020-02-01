@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roadPieces:
   - {fileID: 1150180292547444584, guid: b539e46c44577e24c82ac6677ed9c30c, type: 3}
-  - {fileID: 1120955471141572975, guid: f95d9216128021d4184e84351b2624d1, type: 3}
-  - {fileID: 9047063484437347003, guid: 929949a05d704a94c8be25ceb2b4df01, type: 3}
+  - {fileID: 2017075164600674279, guid: f95d9216128021d4184e84351b2624d1, type: 3}
+  - {fileID: 2067852617363816923, guid: 929949a05d704a94c8be25ceb2b4df01, type: 3}

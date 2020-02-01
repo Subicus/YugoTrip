@@ -66,11 +66,14 @@ public class QuestionGame : MonoBehaviour
     private static readonly int Answer4Key = Animator.StringToHash("answer4");
     private static readonly int ArrowsKey = Animator.StringToHash("arrows");
     private static readonly int EndKey = Animator.StringToHash("end");
+    private static readonly int SizePropertyKey = Shader.PropertyToID("_Size");
     
     private static List<int> AnswersKey = new List<int>
     {
         Answer1Key, Answer2Key, Answer3Key, Answer4Key
     };
+
+    private Material blurMaterial;
 
     #endregion
 
@@ -85,6 +88,8 @@ public class QuestionGame : MonoBehaviour
 
         player1ArrowCanvas = player1Arrow.GetComponent<CanvasGroup>();
         player2ArrowCanvas = player2Arrow.GetComponent<CanvasGroup>();
+
+        blurMaterial = GetComponent<Image>().material;
     }
 
     private void Start()
@@ -176,6 +181,8 @@ public class QuestionGame : MonoBehaviour
         player1ArrowCanvas.alpha = player2ArrowCanvas.alpha = 0f;
         
         animator.SetTrigger(IntroKey);
+        StartCoroutine(DoBlurAnimation(true));
+        
         canInput = true;
         player1ChoiceIndex = Random.Range(0, 3);
         player2ChoiceIndex = Random.Range(0, 3);
@@ -204,6 +211,12 @@ public class QuestionGame : MonoBehaviour
         animator.SetTrigger(ArrowsKey);
 
         DoEndAnimation(p1 == p2);
+    }
+
+    // from animation
+    public void FadeOutBlur()
+    {
+        StartCoroutine(DoBlurAnimation(false));
     }
 
     #endregion
@@ -238,6 +251,20 @@ public class QuestionGame : MonoBehaviour
         {
             v += Time.unscaledDeltaTime / 0.3f;
             staticArrow.localScale = Vector3.one * staticArrowAnimation.Evaluate(v);
+            yield return null;
+        }
+    }
+
+    private IEnumerator DoBlurAnimation(bool isBlurred)
+    {
+        var startValue = isBlurred ? 0f : 20f;
+        var endValue = isBlurred ? 20f : 0f;
+        var duration = isBlurred ? 1f : 0.3f;
+        var v = 0f;
+        while (v <= 1f)
+        {
+            v += Time.unscaledDeltaTime / duration;
+            blurMaterial.SetFloat(SizePropertyKey, Mathf.SmoothStep(startValue, endValue, v));
             yield return null;
         }
     }

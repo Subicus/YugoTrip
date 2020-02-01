@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class QuestionGame : MonoBehaviour
 {
@@ -39,6 +40,8 @@ public class QuestionGame : MonoBehaviour
 
     private bool canInput;
     private float answerDuration;
+    private int player1ChoiceIndex;
+    private int player2ChoiceIndex;
     
     private static readonly int IntroKey = Animator.StringToHash("intro");
     private static readonly int ResetKey = Animator.StringToHash("reset");
@@ -79,6 +82,35 @@ public class QuestionGame : MonoBehaviour
         }, 5f);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            animator.SetTrigger(ResetKey);
+            canvasGroup.alpha = 0f;
+            ShowQuestion(new QuestionData
+            {
+                Question = "HEY, GET ME MY FAVOURITE CIGARS... ",
+                Answer1 = "DRINA NO FILTER",
+                Answer2 = "MARLBRO",
+                Answer3 = "NO SMOKING, PLEASE",
+                Answer4 = "RED APPLE CIGARS",
+            }, 5f);
+        }
+        if (canInput)
+        {
+            if (Input.GetKeyDown(KeyCode.W)) player1ChoiceIndex = 0;
+            else if (Input.GetKeyDown(KeyCode.D)) player1ChoiceIndex = 1;
+            else if (Input.GetKeyDown(KeyCode.S)) player1ChoiceIndex = 2;
+            else if (Input.GetKeyDown(KeyCode.A)) player1ChoiceIndex = 3;
+            
+            if (Input.GetKeyDown(KeyCode.UpArrow)) player2ChoiceIndex = 0;
+            else if (Input.GetKeyDown(KeyCode.RightArrow)) player2ChoiceIndex = 1;
+            else if (Input.GetKeyDown(KeyCode.DownArrow)) player2ChoiceIndex = 2;
+            else if (Input.GetKeyDown(KeyCode.LeftArrow)) player2ChoiceIndex = 3;
+        }
+    }
+
     #endregion
 
     #region Public
@@ -99,6 +131,8 @@ public class QuestionGame : MonoBehaviour
         
         animator.SetTrigger(IntroKey);
         canInput = true;
+        player1ChoiceIndex = Random.Range(0, 3);
+        player2ChoiceIndex = Random.Range(0, 3);
     }
 
     // called from animation
@@ -141,7 +175,7 @@ public class QuestionGame : MonoBehaviour
 
         canInput = false;
         Debug.Log("TIME FINISHED!");
-        SetPlayerChoices(0, 1);
+        SetPlayerChoices(player1ChoiceIndex, player2ChoiceIndex);
     }
 
     #endregion

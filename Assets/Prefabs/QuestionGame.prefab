@@ -619,6 +619,39 @@ MonoBehaviour:
   player2Arrow: {fileID: 1156448333}
   player1StaticArrow: {fileID: 1990865534}
   player2StaticArrow: {fileID: 550930539}
+  staticArrowAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.74722433
+      value: 2.1235437
+      inSlope: 0.5743284
+      outSlope: 0.5743284
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   endBackImage: {fileID: 645777825}
   endText: {fileID: 1969797753}
   wonColor: {r: 0.82321054, g: 0.9716981, b: 0.60960305, a: 0.7607843}

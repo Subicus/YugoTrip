@@ -34,6 +34,7 @@ public class QuestionGame : MonoBehaviour
     public Transform player2Arrow;
     public Transform player1StaticArrow;
     public Transform player2StaticArrow;
+    public AnimationCurve staticArrowAnimation;
 
     public Image endBackImage;
     public Text endText;
@@ -95,7 +96,7 @@ public class QuestionGame : MonoBehaviour
         StopAllCoroutines();
         canvasGroup.alpha = 0f;
         endCanvas.alpha = 0f;
-        ShowQuestion(questionLoader.GetRandomQuestion(), 5f);
+        ShowQuestion(questionLoader.GetRandomQuestion(), 3f);
     }
 
     private void Update()
@@ -234,16 +235,8 @@ public class QuestionGame : MonoBehaviour
         var v = 0f;
         while (v <= 1f)
         {
-            v += Time.unscaledDeltaTime / 0.1f;
-            staticArrow.localScale = Vector3.one * Mathf.SmoothStep(1f, 1.5f, v);
-            yield return null;
-        }
-        
-        v = 0f;
-        while (v <= 1f)
-        {
-            v += Time.unscaledDeltaTime / 0.1f;
-            staticArrow.localScale = Vector3.one * Mathf.SmoothStep(1.5f, 1f, v);
+            v += Time.unscaledDeltaTime / 0.3f;
+            staticArrow.localScale = Vector3.one * staticArrowAnimation.Evaluate(v);
             yield return null;
         }
     }

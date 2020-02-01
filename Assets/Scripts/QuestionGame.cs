@@ -1,0 +1,86 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.Animations;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class QuestionGame : MonoBehaviour
+{
+    #region Data
+
+    public class QuestionData
+    {
+        public string Question;
+        public string Answer1;
+        public string Answer2;
+        public string Answer3;
+        public string Answer4;
+    }
+
+    #endregion
+    
+    #region Properties
+
+    public Text questionText;
+    public Text answer1;
+    public Text answer2;
+    public Text answer3;
+    public Text answer4;
+    public Speedometer Speedometer;
+
+    private Animator animator;
+    private CanvasGroup canvasGroup;
+    private static readonly int IntroKey = Animator.StringToHash("intro");
+
+    #endregion
+
+    #region Initialization
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    private void Start()
+    {
+        canvasGroup.alpha = 0f;
+        ShowQuestion(new QuestionData
+        {
+            Question = "HEY, GET ME MY FAVOURITE CIGARS... ",
+            Answer1 = "DRINA NO FILTER",
+            Answer2 = "MARLBRO",
+            Answer3 = "NO SMOKING, PLEASE",
+            Answer4 = "RED APPLE CIGARS",
+        });
+    }
+
+    #endregion
+
+    #region Public
+
+    public void ShowQuestion(QuestionData questionData)
+    {
+        canvasGroup.alpha = 1f;
+        questionText.text = questionData.Question;
+        answer1.text = questionData.Answer1;
+        answer2.text = questionData.Answer2;
+        answer3.text = questionData.Answer3;
+        answer4.text = questionData.Answer4;
+        Speedometer.RotationNormalized = 1f;
+        
+        animator.SetTrigger(IntroKey);
+    }
+
+    public void IntroAnimationFinished()
+    {
+        Debug.LogError("INTRO DONE");
+    }
+
+    #endregion
+
+    #region Private
+
+    #endregion
+}

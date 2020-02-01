@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8212096990521165701}
   - component: {fileID: 8212096990521165700}
   - component: {fileID: 8212096990521165702}
+  - component: {fileID: 2591270596860336310}
   m_Layer: 5
   m_Name: Speedometer
   m_TagString: Untagged
@@ -88,9 +89,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Needle: {fileID: 8212096991855982857}
+  MyCanvasGroup: {fileID: 0}
   RotationNormalized: 1
   MinRotation: -18.5
   MaxRotation: -163
+--- !u!225 &2591270596860336310
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8212096990521165698}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8212096991855982856
 GameObject:
   m_ObjectHideFlags: 0

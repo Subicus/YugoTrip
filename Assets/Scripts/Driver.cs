@@ -23,7 +23,10 @@ public class Driver : MonoBehaviour
 
     public ParticleSystem smokeParticleSystem;
     public ParticleSystem explosionParticleSystem;
+    public ParticleSystem fireParticleSystem;
     public GameObject[] carObjects;
+    public Material sasijaMaterijal;
+    private Color initialSasijaMaterijalColor;
 
     private float health;
     public float StartHealth;
@@ -45,6 +48,13 @@ public class Driver : MonoBehaviour
         {
             HealthDecreasePerSecond = HealthDecreaseRoughPerSecond = 0;
         }
+
+        initialSasijaMaterijalColor = sasijaMaterijal.color;
+    }
+
+    private void OnDestroy()
+    {
+        sasijaMaterijal.color = initialSasijaMaterijalColor;
     }
 
     void Update()
@@ -159,10 +169,12 @@ public class Driver : MonoBehaviour
         IsBroken = true;
         explosionParticleSystem.Play();
         yield return new WaitForSeconds(0.25f);
+        fireParticleSystem.Play();
         for (int i = 0; i < carObjects.Length; i++)
         {
             carObjects[i].SetActive(false);
         }
+        sasijaMaterijal.color = Color.black;
     }
 
     private void OnTriggerEnter(Collider other)

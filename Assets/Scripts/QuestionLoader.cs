@@ -8,6 +8,7 @@ public class QuestionLoader : MonoBehaviour
 {
 
     private List<QuestionGame.QuestionData> questions = new List<QuestionGame.QuestionData>();
+    private int questionIndex = 0;
     
     void Start()
     {
@@ -33,6 +34,16 @@ public class QuestionLoader : MonoBehaviour
                 Answer4 = answer4,
             });
         }
+        
+        // shuffle the list
+        var count = questions.Count;
+        var last = count - 1;
+        for (var i = 0; i < last; ++i) {
+            var r = Random.Range(i, count);
+            var tmp = questions[i];
+            questions[i] = questions[r];
+            questions[r] = tmp;
+        }
     }
 
     private string RemovePreString(string s)
@@ -46,6 +57,8 @@ public class QuestionLoader : MonoBehaviour
 
     public QuestionGame.QuestionData GetRandomQuestion()
     {
-        return questions[Random.Range(0, questions.Count)];
+        var question = questions[questionIndex];
+        questionIndex = (questionIndex + 1) % questions.Count;
+        return question;
     }
 }

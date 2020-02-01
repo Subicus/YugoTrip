@@ -126,3 +126,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1000
   isFirstPlayer: 1
+  minDistanceToYugo: 3

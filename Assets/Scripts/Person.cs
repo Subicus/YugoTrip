@@ -8,12 +8,18 @@ public class Person : MonoBehaviour
     
     public float speed;
     public bool isFirstPlayer;
+    public float minDistanceToYugo;
     
     private Rigidbody rb;
+
+    private BrokenPart closestBrokenPart;
+    private BrokenPart takenBrokenPart;
+    private Driver yugo;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        yugo = FindObjectOfType<Driver>();
     }
 
     private void Update()
@@ -37,5 +43,57 @@ public class Person : MonoBehaviour
         Vector3 forceV = ray.GetPoint(enter) * speed;
 
         rb.AddForce(forceV);
+
+        if (Input.GetKeyDown(isFirstPlayer ? KeyCode.Space : KeyCode.Return))
+        {
+            if (takenBrokenPart != null)
+            {
+                var distanceToYugo = Vector3.Distance(transform.position, yugo.transform.position);
+                if (distanceToYugo <= minDistanceToYugo)
+                {
+                    Destroy(takenBrokenPart.gameObject);
+                    takenBrokenPart = null;
+                    // TODO: repair Yugo!
+                }
+                else
+                {
+                    closestBrokenPart = takenBrokenPart;
+                    takenBrokenPart.SetTaken(null);
+                    takenBrokenPart = null;
+                }
+            }
+            else if (closestBrokenPart != null)
+            {
+                takenBrokenPart = closestBrokenPart;
+                closestBrokenPart.SetTaken(transform);
+                closestBrokenPart = null;
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag("BrokenPart"))
+            return;
+        
+        // it can be added
+        if (closestBrokenPart != null)
+        {
+            closestBrokenPart.SetSelected(false, isFirstPlayer);
+        }
+        closestBrokenPart = other.gameObject.GetComponentInParent<BrokenPart>();
+        closestBrokenPart.SetSelected(true, isFirstPlayer);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.gameObject.CompareTag("BrokenPart"))
+            return;
+        
+        if (closestBrokenPart != null)
+        {
+            closestBrokenPart.SetSelected(false, isFirstPlayer);
+        }
+        closestBrokenPart = null;
     }
 }

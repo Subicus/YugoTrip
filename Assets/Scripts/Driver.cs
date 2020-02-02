@@ -255,6 +255,10 @@ public class Driver : MonoBehaviour
                 var victory = other.gameObject.GetComponent<VictoryArea>();
                 if (victory != null)
                 {
+                    if (victory.MessageOnReached != null && victory.MessageOnReached.Trim() != "")
+                    {
+                        ShowCloud(victory.MessageOnReached);
+                    }
                     GameManager.I.Victory(victory.LoadNextScene);
                 }
                 else

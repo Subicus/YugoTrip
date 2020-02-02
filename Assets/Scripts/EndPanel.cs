@@ -44,7 +44,7 @@ public class EndPanel : MonoBehaviour
 
         isEnding = true;
         var text = isWin ? "BRAVO!\nRELATIONSHIP REPAIRED!" : "RELATIONSHIP BROKEN!";
-        var delay = isDelay ? 0f : 3f;
+        var delay = isDelay ? 3f : 0f;
         StartCoroutine(DoAnimation(text, isWin, delay, endCallback));
     }
 

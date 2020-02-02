@@ -167,11 +167,7 @@ public class GameManager : MonoBehaviour
                 cameraManager.FollowAdditionalTargets = false;
                 break;
             case GameState.Repairing:
-                cameraManager.FollowAdditionalTargets = true;
-                partsManager.GenerateBrokenParts(5, 3);
-                firstPlayer.GoOutOfCar();
-                secondPlayer.GoOutOfCar();
-                yugo.Break();
+                yugo.StartCoroutine(StartBreaking());
                 break;
             case GameState.Questions:
                 Time.timeScale = 0f;
@@ -180,6 +176,18 @@ public class GameManager : MonoBehaviour
                 yugo.Explode();
                 break;
         }
+    }
+
+    private IEnumerator StartBreaking()
+    {
+        yugo.StartBreaking();
+        yield return new WaitForSeconds(1f);
+        
+        yugo.Break();
+        cameraManager.FollowAdditionalTargets = true;
+        partsManager.GenerateBrokenParts(5, 3);
+        firstPlayer.GoOutOfCar();
+        secondPlayer.GoOutOfCar();
     }
 
     #endregion

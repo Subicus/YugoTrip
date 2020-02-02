@@ -162,11 +162,15 @@ public class Driver : MonoBehaviour
         worldCanvas.rotation = Quaternion.Euler(0f, Camera.main.transform.rotation.eulerAngles.y, 0f);
     }
 
+    public void StartBreaking()
+    {
+        smokeParticleSystem.Play();
+    }
+
     public void Break()
     {
         IsBroken = true;
-        smokeParticleSystem.Play();
-        ShowCloud("REPAIR IT!");
+        ShowCloud("REPAIR YUGO!");
     }
 
     public void EmptyOut()

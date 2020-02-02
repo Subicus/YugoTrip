@@ -13,12 +13,19 @@ public class WorldBuilder : MonoBehaviour
         for (int i = 0; i < pieceCount; i++)
         {
             var piecePrefab = level.roadPieces[Random.Range(0, level.roadPieces.Length)];
-            GameObject go = Instantiate(piecePrefab);
-
-            var piece = go.GetComponent<RoadPiece>();
-            Vector3 offset = piece.transform.position - piece.startPivot.position;
-            go.transform.position = prevTransformPivot.position + offset;
-            prevTransformPivot = piece.endPivot;
+            Place(piecePrefab, ref prevTransformPivot);
         }
+
+        Place(level.endPiece, ref prevTransformPivot);
+    }
+
+    void Place(GameObject piecePrefab, ref Transform prevTransformPivot)
+    {
+        GameObject go = Instantiate(piecePrefab);
+
+        var piece = go.GetComponent<RoadPiece>();
+        Vector3 offset = piece.transform.position - piece.startPivot.position;
+        go.transform.position = prevTransformPivot.position + offset;
+        prevTransformPivot = piece.endPivot;
     }
 }

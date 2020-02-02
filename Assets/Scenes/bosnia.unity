@@ -955,7 +955,7 @@ MonoBehaviour:
   mainUi: {fileID: 1025024034}
   MinTimeForQuestion: 30
   MaxTimeForQuestion: 60
-  InitialTimeForQuestion: 20
+  InitialTimeForQuestion: 45
 --- !u!1001 &817223066
 PrefabInstance:
   m_ObjectHideFlags: 0

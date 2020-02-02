@@ -132,7 +132,7 @@ MonoBehaviour:
   - {fileID: 3104052589720847846}
   sasijaMaterijal: {fileID: 2100000, guid: 7a3f82f3641733740adbb0dd5ac72c67, type: 2}
   StartHealth: 100
-  HealthDecreasePerSecond: 5
+  HealthDecreasePerSecond: 2
   HealthDecreaseInitial: 7
   cloudText: {fileID: 1586599900240470059}
   worldCanvas: {fileID: 8756393650902723046}

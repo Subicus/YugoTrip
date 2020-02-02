@@ -50,8 +50,8 @@ public class Person : MonoBehaviour
 
         
         var isSpace = isFirstPlayer ?
-            (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Joystick1Button1)) 
-            : (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Joystick2Button1));
+            (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button1)) 
+            : (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Joystick2Button1));
         if (isSpace)
         {
             var distanceToYugo = Vector3.Distance(transform.position, yugo.transform.position);
@@ -96,12 +96,12 @@ public class Person : MonoBehaviour
         if (isFirstPlayer)
         {
             // left side
-            transform.position = yugo.transform.position - new Vector3(forward.z, forward.y, -forward.x) * 2f;
+            transform.position = yugo.transform.position - new Vector3(forward.z, forward.y, -forward.x) * 2f + Vector3.up;
         }
         else
         {
             // right side
-            transform.position = yugo.transform.position + new Vector3(forward.z, forward.y, -forward.x) * 2f;
+            transform.position = yugo.transform.position + new Vector3(forward.z, forward.y, -forward.x) * 2f + Vector3.up;
         }
         gameObject.SetActive(true);
     }

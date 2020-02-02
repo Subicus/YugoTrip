@@ -41,6 +41,7 @@ public class Driver : MonoBehaviour
     private IEnumerator cloudAnimation;
 
     private bool wasBrokenOnce;
+    private int initialFontSize;
 
     int emissionId;
     public bool IsBroken { get; private set; }
@@ -48,6 +49,7 @@ public class Driver : MonoBehaviour
 
     private void Start()
     {
+        initialFontSize = cloudText.fontSize;
         rb = GetComponent<Rigidbody>();
         cloudCanvasGroup = cloudText.GetComponent<CanvasGroup>();
         cloudCanvasGroup.alpha = 0f;
@@ -243,7 +245,7 @@ public class Driver : MonoBehaviour
             var customMessage = other.gameObject.GetComponent<CustomMessage>();
             if (customMessage != null && customMessage.Message != "")
             {
-                ShowCloud(customMessage.Message.ToUpper());
+                ShowCloud(customMessage.Message.ToUpper(), isSmallFont: customMessage.SmallFont);
             }
         }
         else if (other.gameObject.CompareTag("Victory"))
@@ -281,7 +283,7 @@ public class Driver : MonoBehaviour
         }
     }
 
-    public void ShowCloud(string text, float duration = 5f, float delay = 0f)
+    public void ShowCloud(string text, float duration = 5f, float delay = 0f, bool isSmallFont = false)
     {
         if (cloudCanvasGroup == null)
             return;
@@ -290,6 +292,8 @@ public class Driver : MonoBehaviour
         {
             StopCoroutine(cloudAnimation);
         }
+
+        cloudText.fontSize = isSmallFont ? (int)(initialFontSize * 0.6f) : initialFontSize;
         cloudAnimation = AnimateCloud(text, duration, delay);
         StartCoroutine(cloudAnimation);
     }

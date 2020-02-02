@@ -89,6 +89,14 @@ public class GameManager : MonoBehaviour
             ReloadGame();
             return;
         }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            var sceneName = SceneManager.GetActiveScene().name;
+            if (sceneName == "serbia") SceneManager.LoadScene("bosnia");
+            else if (sceneName == "bosnia") SceneManager.LoadScene("rivijera");
+            else if (sceneName == "rivijera") SceneManager.LoadScene("end");
+            return;
+        }
         if (State == GameState.Repairing)
         {
             if (Input.GetKeyDown(KeyCode.Y))

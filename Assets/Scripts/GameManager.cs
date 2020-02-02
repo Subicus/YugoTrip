@@ -89,6 +89,16 @@ public class GameManager : MonoBehaviour
             ReloadGame();
             return;
         }
+        if (State == GameState.Repairing)
+        {
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                FixedCar();
+                firstPlayer.GoInCar();
+                secondPlayer.GoInCar();
+                return;
+            }
+        }
         if (State == GameState.Driving)
         {
             if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton3))

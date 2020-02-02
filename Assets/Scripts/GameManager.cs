@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Driving)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton3))
             {
                 StartRunning();
                 return;

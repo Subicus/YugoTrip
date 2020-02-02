@@ -3549,7 +3549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d865ad334a04477c94db389b5550c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: seaside
+  SceneToLoad: rivijera
   MessageOnReached: THE SEA IS NEAR!
 --- !u!1 &1017208797411092086
 GameObject:

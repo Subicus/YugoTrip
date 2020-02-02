@@ -89,7 +89,8 @@ public class Driver : MonoBehaviour
         float accelInput = isDriving ? Input.GetAxis("Vertical") : 0;
         float steerInput = isDriving ? Input.GetAxis("Horizontal") : 0;
 
-        float handbrakeInput = isDriving && Input.GetKey(KeyCode.Space) ? 1 : 0;
+        var isSpace = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton1);
+        float handbrakeInput = isDriving && isSpace ? 1 : 0;
 
         float accel = 0;
         float brake = 0;
@@ -181,7 +182,7 @@ public class Driver : MonoBehaviour
     public void EmptyOut()
     {
         IsEmpty = true;
-        ShowCloud("LET'S MAKE A BREAK!");
+        ShowCloud("LET'S TAKE A BREAK!");
     }
 
     public void Repair()
@@ -255,6 +256,10 @@ public class Driver : MonoBehaviour
                 var victory = other.gameObject.GetComponent<VictoryArea>();
                 if (victory != null)
                 {
+                    if (victory.MessageOnReached != null && victory.MessageOnReached.Trim() != "")
+                    {
+                        ShowCloud(victory.MessageOnReached);
+                    }
                     GameManager.I.Victory(victory.LoadNextScene);
                 }
                 else

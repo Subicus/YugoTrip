@@ -48,7 +48,11 @@ public class Person : MonoBehaviour
 
         rb.AddForce(forceV);
 
-        if (Input.GetKeyDown(isFirstPlayer ? KeyCode.Space : KeyCode.Return))
+        
+        var isSpace = isFirstPlayer ?
+            (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Joystick1Button1)) 
+            : (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.Joystick2Button1));
+        if (isSpace)
         {
             var distanceToYugo = Vector3.Distance(transform.position, yugo.transform.position);
             if (GameManager.I.IsRepairing)

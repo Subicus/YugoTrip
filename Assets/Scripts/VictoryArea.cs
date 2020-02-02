@@ -7,6 +7,7 @@ public class VictoryArea : MonoBehaviour
 {
 
     public string SceneToLoad;
+    public string MessageOnReached;
 
     public void LoadNextScene()
     {

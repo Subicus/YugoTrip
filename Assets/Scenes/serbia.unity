@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 11400000, guid: a1a96ef1c774fb748a9d7c0702967606, type: 2}
-  pieceCount: 10
+  pieceCount: 5
 --- !u!4 &567880111
 Transform:
   m_ObjectHideFlags: 0

@@ -1221,6 +1221,7 @@ GameObject:
   - component: {fileID: 5165257320231030460}
   - component: {fileID: 4421954134991752227}
   - component: {fileID: 5129005550437727144}
+  - component: {fileID: 6067953382564146192}
   m_Layer: 0
   m_Name: WinArea
   m_TagString: Victory
@@ -1236,8 +1237,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2223190620760869800}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -319.6, y: 1.58, z: 12.5}
-  m_LocalScale: {x: 15, y: 7.5, z: 33.3}
+  m_LocalPosition: {x: -327.9, y: 1.58, z: 12.9}
+  m_LocalScale: {x: 15.42, y: 7.5, z: 48.5}
   m_Children: []
   m_Father: {fileID: 3207821474826095358}
   m_RootOrder: 5
@@ -1302,6 +1303,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6067953382564146192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223190620760869800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d865ad334a04477c94db389b5550c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneToLoad: bosnia
+  MessageOnReached: Welcome to BOSNIA!
 --- !u!64 &1473314588
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1518,6 +1533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Message: Refill gas!
+  SmallFont: 0
 --- !u!1 &3856881393076290063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2204,6 +2220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Message: WARNIG! WRONG TURN!
+  SmallFont: 0
 --- !u!64 &955387360
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2696,15 +2713,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7000107501923849116}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1408304956995061901 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8263592165488925457, guid: 8627cf073b49dc14ca7c2da3b0708cdb,
-    type: 3}
-  m_PrefabInstance: {fileID: 7000107501923849116}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6905415305769986457 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4535571282439240197, guid: 8627cf073b49dc14ca7c2da3b0708cdb,
+    type: 3}
+  m_PrefabInstance: {fileID: 7000107501923849116}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1408304956995061901 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8263592165488925457, guid: 8627cf073b49dc14ca7c2da3b0708cdb,
     type: 3}
   m_PrefabInstance: {fileID: 7000107501923849116}
   m_PrefabAsset: {fileID: 0}

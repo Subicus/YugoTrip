@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Driving)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton3))
             {
                 StartRunning();
                 return;
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
     {
         endCallback = callback;
         State = GameState.Victory;
-        endPanel.DoEndAnimation(true, endCallback);
+        endPanel.DoEndAnimation(true, endCallback, true);
     }
 
     public void QuestionAnswered(bool isRepaired)

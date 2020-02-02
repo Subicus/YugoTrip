@@ -33,12 +33,15 @@ public class Driver : MonoBehaviour
     private float health;
     public float StartHealth;
     public float HealthDecreasePerSecond;
-    public float HealthDecreaseRoughPerSecond;
+    public float HealthDecreaseInitial;
 
     public Text cloudText;
     private CanvasGroup cloudCanvasGroup;
     public Transform worldCanvas;
     private IEnumerator cloudAnimation;
+
+    private bool wasBrokenOnce;
+    private int initialFontSize;
 
     int emissionId;
     public bool IsBroken { get; private set; }
@@ -46,6 +49,7 @@ public class Driver : MonoBehaviour
 
     private void Start()
     {
+        initialFontSize = cloudText.fontSize;
         rb = GetComponent<Rigidbody>();
         cloudCanvasGroup = cloudText.GetComponent<CanvasGroup>();
         cloudCanvasGroup.alpha = 0f;
@@ -56,7 +60,7 @@ public class Driver : MonoBehaviour
         health = StartHealth;
         if (GameManager.I == null)
         {
-            HealthDecreasePerSecond = HealthDecreaseRoughPerSecond = 0;
+            HealthDecreasePerSecond = HealthDecreaseInitial = 0;
         }
 
         initialSasijaMaterijalColor = sasijaMaterijal.color;
@@ -170,6 +174,7 @@ public class Driver : MonoBehaviour
     public void Break()
     {
         IsBroken = true;
+        wasBrokenOnce = true;
         ShowCloud("REPAIR YUGO!");
     }
 
@@ -240,7 +245,7 @@ public class Driver : MonoBehaviour
             var customMessage = other.gameObject.GetComponent<CustomMessage>();
             if (customMessage != null && customMessage.Message != "")
             {
-                ShowCloud(customMessage.Message.ToUpper());
+                ShowCloud(customMessage.Message.ToUpper(), isSmallFont: customMessage.SmallFont);
             }
         }
         else if (other.gameObject.CompareTag("Victory"))
@@ -268,8 +273,9 @@ public class Driver : MonoBehaviour
     {
         if (health < 0)
             return;
-        
-        health -= Time.deltaTime * HealthDecreasePerSecond;
+
+        var decrease = wasBrokenOnce ? HealthDecreasePerSecond : HealthDecreaseInitial;
+        health -= Time.deltaTime * decrease;
         if (health <= 0)
         {
             health = 0f;
@@ -277,7 +283,7 @@ public class Driver : MonoBehaviour
         }
     }
 
-    public void ShowCloud(string text, float duration = 5f, float delay = 0f)
+    public void ShowCloud(string text, float duration = 5f, float delay = 0f, bool isSmallFont = false)
     {
         if (cloudCanvasGroup == null)
             return;
@@ -286,6 +292,8 @@ public class Driver : MonoBehaviour
         {
             StopCoroutine(cloudAnimation);
         }
+
+        cloudText.fontSize = isSmallFont ? (int)(initialFontSize * 0.6f) : initialFontSize;
         cloudAnimation = AnimateCloud(text, duration, delay);
         StartCoroutine(cloudAnimation);
     }

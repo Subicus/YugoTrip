@@ -181,7 +181,7 @@ public class Driver : MonoBehaviour
     public void EmptyOut()
     {
         IsEmpty = true;
-        ShowCloud("LET'S MAKE A BREAK!");
+        ShowCloud("LET'S TAKE A BREAK!");
     }
 
     public void Repair()

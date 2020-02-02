@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 133, y: 8.3}
-  m_SizeDelta: {x: 70.1, y: 60.5}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4620023643817881626
 CanvasRenderer:
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c140009c9e9184133a3f6d8bf70d799a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63195eb6ee8124c29b5c13f51168a4cf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartText: {fileID: 5388642412886534656}
-  heartTransform: {fileID: 3803080707403614706}
 --- !u!1 &7370746414267074937
 GameObject:
   m_ObjectHideFlags: 0

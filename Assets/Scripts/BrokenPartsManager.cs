@@ -30,14 +30,6 @@ public class BrokenPartsManager : MonoBehaviour
         yugo = FindObjectOfType<Driver>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            GenerateBrokenParts(5, 3);
-        }
-    }
-
     #endregion
 
     #region Public
@@ -50,7 +42,7 @@ public class BrokenPartsManager : MonoBehaviour
 
         if (requiredNumberOfParts == 0)
         {
-            GameManager.I.RepairCar();
+            GameManager.I.FixedCar();
         }
     }
 

@@ -119,10 +119,6 @@ public class QuestionGame : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            StartNewGame();
-        }
         if (canInput)
         {
             if (Input.GetKeyDown(KeyCode.W))

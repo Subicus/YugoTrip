@@ -41,7 +41,8 @@ public class Driver : MonoBehaviour
     private IEnumerator cloudAnimation;
 
     int emissionId;
-    public bool IsBroken { get; set; }
+    public bool IsBroken { get; private set; }
+    public bool IsEmpty { get; private set; }
 
     private void Start()
     {
@@ -66,6 +67,7 @@ public class Driver : MonoBehaviour
     private void OnDestroy()
     {
         sasijaMaterijal.color = initialSasijaMaterijalColor;
+        StopAllCoroutines();
     }
 
     void Update()
@@ -114,7 +116,7 @@ public class Driver : MonoBehaviour
         if (rb.velocity.magnitude > maxSpeed)
             accelInput = 0;
         
-        if (IsBroken)
+        if (IsBroken || IsEmpty)
         {
             brake = 1;
         }
@@ -167,6 +169,11 @@ public class Driver : MonoBehaviour
         ShowCloud("REPAIR IT!");
     }
 
+    public void EmptyOut()
+    {
+        IsEmpty = true;
+    }
+
     public void Repair()
     {
         health = StartHealth;
@@ -180,6 +187,12 @@ public class Driver : MonoBehaviour
             "YUGO IS THE BEST!",
         };
         ShowCloud(repairedStrings[Random.Range(0, repairedStrings.Count)]);
+    }
+
+    public void StartEngine()
+    {
+        IsEmpty = false;
+        ShowCloud("LET'S GO!");
     }
 
     public void Explode()
@@ -245,6 +258,9 @@ public class Driver : MonoBehaviour
 
     public void ShowCloud(string text, float duration = 5f, float delay = 0f)
     {
+        if (cloudCanvasGroup == null)
+            return;
+        
         if (cloudAnimation != null)
         {
             StopCoroutine(cloudAnimation);

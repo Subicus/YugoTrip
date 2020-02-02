@@ -16,6 +16,8 @@ public class Person : MonoBehaviour
     private BrokenPart takenBrokenPart;
     private Driver yugo;
     private BrokenPartsManager partsManager;
+    
+    public bool IsInCar { get; private set; }
 
     private void Awake()
     {
@@ -48,33 +50,44 @@ public class Person : MonoBehaviour
 
         if (Input.GetKeyDown(isFirstPlayer ? KeyCode.Space : KeyCode.Return))
         {
-            if (takenBrokenPart != null)
+            var distanceToYugo = Vector3.Distance(transform.position, yugo.transform.position);
+            if (GameManager.I.IsRepairing)
             {
-                var distanceToYugo = Vector3.Distance(transform.position, yugo.transform.position);
-                if (distanceToYugo <= minDistanceToYugo)
+                if (takenBrokenPart != null)
                 {
-                    partsManager.RepairWithPart(takenBrokenPart);
-                    takenBrokenPart = null;
-                    // TODO: repair Yugo!
+                    if (distanceToYugo <= minDistanceToYugo)
+                    {
+                        partsManager.RepairWithPart(takenBrokenPart);
+                        takenBrokenPart = null;
+                        // TODO: repair Yugo!
+                    }
+                    else
+                    {
+                        closestBrokenPart = takenBrokenPart;
+                        takenBrokenPart.SetTaken(null);
+                        takenBrokenPart = null;
+                    }
                 }
-                else
+                else if (closestBrokenPart != null)
                 {
-                    closestBrokenPart = takenBrokenPart;
-                    takenBrokenPart.SetTaken(null);
-                    takenBrokenPart = null;
+                    takenBrokenPart = closestBrokenPart;
+                    closestBrokenPart.SetTaken(transform);
+                    closestBrokenPart = null;
                 }
             }
-            else if (closestBrokenPart != null)
+            else if (GameManager.I.IsRunning)
             {
-                takenBrokenPart = closestBrokenPart;
-                closestBrokenPart.SetTaken(transform);
-                closestBrokenPart = null;
+                if (distanceToYugo <= minDistanceToYugo)
+                {
+                    GoInCar();
+                }
             }
         }
     }
 
     public void GoOutOfCar()
     {
+        IsInCar = false;
         var forward = yugo.transform.forward.normalized;
         if (isFirstPlayer)
         {
@@ -91,7 +104,9 @@ public class Person : MonoBehaviour
 
     public void GoInCar()
     {
+        IsInCar = true;
         gameObject.SetActive(false);
+        GameManager.I.GoInCar();
     }
 
     private void OnTriggerEnter(Collider other)

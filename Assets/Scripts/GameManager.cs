@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         Questions,
         Exploded,
         Victory,
+        Running,
     }
 
     private GameState state;
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour
     private bool isFirstQuestion = true;
     
     public bool IsDriving => State == GameState.Driving;
+    public bool IsRepairing => State == GameState.Repairing;
+    public bool IsRunning => State == GameState.Running;
 
     #region Initialization
 
@@ -67,16 +70,17 @@ public class GameManager : MonoBehaviour
     {
         if (State == GameState.Driving)
         {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                StartRunning();
+                return;
+            }
             if (Input.GetKeyDown(KeyCode.R))
             {
                 BreakCar();
+                return;
             }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                ExplodeCar();
-            }
-
+            
             // check for question
             timeForQuestion -= Time.deltaTime;
             if (timeForQuestion <= 0f)
@@ -97,9 +101,9 @@ public class GameManager : MonoBehaviour
         State = GameState.Repairing;
     }
 
-    public void RepairCar()
+    public void FixedCar()
     {
-        State = GameState.Driving;
+        State = GameState.Running;
     }
     
     public void ExplodeCar()
@@ -125,6 +129,23 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    
+    public void StartRunning()
+    {
+        firstPlayer.GoOutOfCar();
+        secondPlayer.GoOutOfCar();
+        yugo.EmptyOut();
+        State = GameState.Running;
+    }
+
+    public void GoInCar()
+    {
+        if (firstPlayer.IsInCar && secondPlayer.IsInCar)
+        {
+            State = GameState.Driving;
+            yugo.StartEngine();
+        }
+    }
 
     #endregion
 
@@ -134,14 +155,15 @@ public class GameManager : MonoBehaviour
     {
         switch (State)
         {
-            case GameState.Driving:
+            case GameState.Running:
                 if (yugo.IsBroken)
                 {
-                    firstPlayer.GoInCar();
-                    secondPlayer.GoInCar();
                     yugo.Repair();
                     partsManager.RemoveAllParts();
                 }
+                cameraManager.FollowAdditionalTargets = true;
+                break;
+            case GameState.Driving:
                 cameraManager.FollowAdditionalTargets = false;
                 break;
             case GameState.Repairing:

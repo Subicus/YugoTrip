@@ -247,7 +247,15 @@ public class Driver : MonoBehaviour
         {
             if (GameManager.I != null)
             {
-                GameManager.I.Victory(); 
+                var victory = other.gameObject.GetComponent<VictoryArea>();
+                if (victory != null)
+                {
+                    GameManager.I.Victory(victory.LoadNextScene);
+                }
+                else
+                {
+                    GameManager.I.Victory();  
+                } 
             }
             else
             {

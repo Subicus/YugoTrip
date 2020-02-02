@@ -37,7 +37,7 @@ public class EndPanel : MonoBehaviour
 
     #region Public
 
-    public void DoEndAnimation(bool isWin)
+    public void DoEndAnimation(bool isWin, Action endCallback = null)
     {
         if (isEnding)
             return;
@@ -45,14 +45,14 @@ public class EndPanel : MonoBehaviour
         isEnding = true;
         var text = isWin ? "BRAVO!\nRELATIONSHIP REPAIRED!" : "RELATIONSHIP BROKEN!";
         var delay = isWin ? 0f : 3f;
-        StartCoroutine(DoAnimation(text, isWin, delay));
+        StartCoroutine(DoAnimation(text, isWin, delay, endCallback));
     }
 
     #endregion
 
     #region Private
 
-    private IEnumerator DoAnimation(string text, bool isWin, float delay = 0f)
+    private IEnumerator DoAnimation(string text, bool isWin, float delay = 0f, Action endCallback = null)
     {
         myCanvasGroup.alpha = 0f;
         overlayCanvasGroup.alpha = 0f;
@@ -79,8 +79,8 @@ public class EndPanel : MonoBehaviour
             yield return null;
         }
         
-        // just reload game
-        GameManager.I.ReloadGame();
+        // just load next game
+        endCallback?.Invoke();
     }
 
     #endregion

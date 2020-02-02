@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     private float timeForQuestion;
     private bool isFirstQuestion = true;
+    private Action endCallback;
     
     public bool IsDriving => State == GameState.Driving;
     public bool IsRepairing => State == GameState.Repairing;
@@ -109,13 +110,14 @@ public class GameManager : MonoBehaviour
     public void ExplodeCar()
     {
         State = GameState.Exploded;
-        endPanel.DoEndAnimation(false);
+        endPanel.DoEndAnimation(false, ReloadGame);
     }
 
-    public void Victory()
+    public void Victory(Action callback = null)
     {
+        endCallback = callback;
         State = GameState.Victory;
-        endPanel.DoEndAnimation(true);
+        endPanel.DoEndAnimation(true, endCallback);
     }
 
     public void FinishQuestion()

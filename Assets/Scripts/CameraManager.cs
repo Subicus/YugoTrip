@@ -23,6 +23,8 @@ public class CameraManager : MonoBehaviour
 
     private void Start()
     {
+        followPosition = transform.position;
+
         targetRb = target.GetComponent<Rigidbody>();
         if (multipleTargets != null)
         {

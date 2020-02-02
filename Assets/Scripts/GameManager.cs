@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -14,7 +15,8 @@ public class GameManager : MonoBehaviour
         Driving,
         Repairing,
         Questions,
-        Exploded
+        Exploded,
+        Victory,
     }
 
     private GameState state;
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
     public QuestionGame questionGame;
     public CameraManager cameraManager;
     public BrokenPartsManager partsManager;
+    public EndPanel endPanel;
 
     public float MinTimeForQuestion;
     public float MaxTimeForQuestion;
@@ -102,6 +105,13 @@ public class GameManager : MonoBehaviour
     public void ExplodeCar()
     {
         State = GameState.Exploded;
+        endPanel.DoEndAnimation(false);
+    }
+
+    public void Victory()
+    {
+        State = GameState.Victory;
+        endPanel.DoEndAnimation(true);
     }
 
     public void FinishQuestion()
@@ -109,6 +119,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         State = GameState.Driving;
         timeForQuestion = Random.Range(MinTimeForQuestion, MaxTimeForQuestion);
+    }
+
+    public void ReloadGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     #endregion

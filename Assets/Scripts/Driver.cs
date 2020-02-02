@@ -213,6 +213,21 @@ public class Driver : MonoBehaviour
                 Explode();
             }
         }
+        else if (other.gameObject.CompareTag("Crossing"))
+        {
+            ShowCloud("MAKE A TURN HERE!");
+        }
+        else if (other.gameObject.CompareTag("Victory"))
+        {
+            if (GameManager.I != null)
+            {
+                GameManager.I.Victory(); 
+            }
+            else
+            {
+                ShowCloud("WOOHOO!");
+            }
+        }
     }
 
     private void UpdateHealth()

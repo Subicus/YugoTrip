@@ -694,7 +694,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &729339516
 GameObject:
@@ -802,7 +802,7 @@ Transform:
   m_LocalScale: {x: 29.099998, y: 10.5, z: 35.18}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &747347708
 GameObject:
@@ -894,7 +894,7 @@ Transform:
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &806537059
 GameObject:
@@ -947,9 +947,9 @@ MonoBehaviour:
   partsManager: {fileID: 1437055801}
   endPanel: {fileID: 444252133}
   mainUi: {fileID: 1025024034}
-  MinTimeForQuestion: 30
-  MaxTimeForQuestion: 60
-  InitialTimeForQuestion: 45
+  MinTimeForQuestion: 60
+  MaxTimeForQuestion: 120
+  InitialTimeForQuestion: 60
 --- !u!1001 &817223066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1140,7 +1140,7 @@ Transform:
   m_LocalScale: {x: 149.33081, y: 43.53436, z: 40.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 3.4180002, z: 0}
 --- !u!1 &869241025
 GameObject:
@@ -2630,7 +2630,7 @@ Transform:
   - {fileID: 1804787979}
   - {fileID: 886203837}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2147303504
 PrefabInstance:
@@ -2767,6 +2767,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475525774686184818, guid: 937b334be7c5ce34ea006955f58ded75,
+        type: 3}
+      propertyPath: HealthDecreaseInitial
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475525774686184818, guid: 937b334be7c5ce34ea006955f58ded75,
+        type: 3}
+      propertyPath: HealthDecreasePerSecond
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 937b334be7c5ce34ea006955f58ded75, type: 3}

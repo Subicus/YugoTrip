@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/bosnia.unity
     guid: e62e642f4cf574d8fa3aedfc5adfa456
+  - enabled: 1
+    path: Assets/Scenes/rivijera.unity
+    guid: af54fb901344fd74e9665436696ebf5c
+  - enabled: 1
+    path: Assets/Scenes/end.unity
+    guid: 5f364a0896d5441ab84144d3178bbcd6
   m_configObjects: {}

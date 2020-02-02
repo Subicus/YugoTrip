@@ -230,6 +230,14 @@ public class Driver : MonoBehaviour
         else if (other.gameObject.CompareTag("Crossing"))
         {
             ShowCloud("MAKE A TURN HERE!");
+        }    
+        else if (other.gameObject.CompareTag("CustomMessage"))
+        {
+            var customMessage = other.gameObject.GetComponent<CustomMessage>();
+            if (customMessage != null && customMessage.Message != "")
+            {
+                ShowCloud(customMessage.Message.ToUpper());
+            }
         }
         else if (other.gameObject.CompareTag("Victory"))
         {

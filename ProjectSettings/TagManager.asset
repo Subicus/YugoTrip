@@ -8,6 +8,7 @@ TagManager:
   - Death
   - Crossing
   - Victory
+  - CustomMessage
   layers:
   - Default
   - TransparentFX

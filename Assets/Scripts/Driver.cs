@@ -33,12 +33,14 @@ public class Driver : MonoBehaviour
     private float health;
     public float StartHealth;
     public float HealthDecreasePerSecond;
-    public float HealthDecreaseRoughPerSecond;
+    public float HealthDecreaseInitial;
 
     public Text cloudText;
     private CanvasGroup cloudCanvasGroup;
     public Transform worldCanvas;
     private IEnumerator cloudAnimation;
+
+    private bool wasBrokenOnce;
 
     int emissionId;
     public bool IsBroken { get; private set; }
@@ -56,7 +58,7 @@ public class Driver : MonoBehaviour
         health = StartHealth;
         if (GameManager.I == null)
         {
-            HealthDecreasePerSecond = HealthDecreaseRoughPerSecond = 0;
+            HealthDecreasePerSecond = HealthDecreaseInitial = 0;
         }
 
         initialSasijaMaterijalColor = sasijaMaterijal.color;
@@ -170,6 +172,7 @@ public class Driver : MonoBehaviour
     public void Break()
     {
         IsBroken = true;
+        wasBrokenOnce = true;
         ShowCloud("REPAIR YUGO!");
     }
 
@@ -268,8 +271,9 @@ public class Driver : MonoBehaviour
     {
         if (health < 0)
             return;
-        
-        health -= Time.deltaTime * HealthDecreasePerSecond;
+
+        var decrease = wasBrokenOnce ? HealthDecreasePerSecond : HealthDecreaseInitial;
+        health -= Time.deltaTime * decrease;
         if (health <= 0)
         {
             health = 0f;

@@ -12,6 +12,7 @@ public class Person : MonoBehaviour
 
     public GameObject on;
     public GameObject ona;
+    public float RotationSpeed;
     
     private Rigidbody rb;
 
@@ -19,6 +20,8 @@ public class Person : MonoBehaviour
     private BrokenPart takenBrokenPart;
     private Driver yugo;
     private BrokenPartsManager partsManager;
+
+    private Transform modelTransform;
     
     public bool IsInCar { get; private set; }
 
@@ -33,6 +36,7 @@ public class Person : MonoBehaviour
     {
         on.SetActive(isFirstPlayer);
         ona.SetActive(!isFirstPlayer);
+        modelTransform = isFirstPlayer ? on.transform : ona.transform;
     }
 
     private void Update()
@@ -96,6 +100,10 @@ public class Person : MonoBehaviour
                 }
             }
         }
+        
+        // rotate them
+        var _lookRotation = Quaternion.LookRotation(rb.velocity.normalized);
+        modelTransform.rotation = Quaternion.Slerp(modelTransform.rotation, _lookRotation, Time.deltaTime * RotationSpeed);
     }
 
     public void GoOutOfCar()

@@ -131,6 +131,7 @@ MonoBehaviour:
   minDistanceToYugo: 3
   on: {fileID: 4592293542407058266}
   ona: {fileID: 1818360769758538492}
+  RotationSpeed: 5
 --- !u!1001 &5519996642498013779
 PrefabInstance:
   m_ObjectHideFlags: 0

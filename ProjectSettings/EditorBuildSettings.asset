@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/test_gameplay.unity
-    guid: 4f90b48da3aff403f9ad8b3b255dd8ba
+    path: Assets/Scenes/serbia.unity
+    guid: ccb6b12daf96f4f288e41c72c87efb10
   m_configObjects: {}

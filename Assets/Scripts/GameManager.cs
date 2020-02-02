@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour
         endCallback = callback;
         State = GameState.Victory;
         endPanel.DoEndAnimation(true, endCallback, true);
+        yugo.EmptyOut(false);
     }
 
     public void QuestionAnswered(bool isRepaired)

@@ -179,10 +179,13 @@ public class Driver : MonoBehaviour
         ShowCloud("REPAIR YUGO!");
     }
 
-    public void EmptyOut()
+    public void EmptyOut(bool showCloud = true)
     {
         IsEmpty = true;
-        ShowCloud("LET'S TAKE A BREAK!");
+        if (showCloud)
+        {
+            ShowCloud("LET'S TAKE A BREAK!");
+        }
     }
 
     public void Repair()

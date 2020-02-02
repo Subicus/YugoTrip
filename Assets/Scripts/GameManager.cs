@@ -20,6 +20,18 @@ public class GameManager : MonoBehaviour
         Running,
     }
 
+    private int hearts;
+
+    public int Hearts
+    {
+        get => hearts;
+        set
+        {
+            mainUi.RefreshHearts(hearts, value);
+            hearts = value;
+        }
+    }
+
     private GameState state;
     public GameState State
     {
@@ -38,6 +50,7 @@ public class GameManager : MonoBehaviour
     public CameraManager cameraManager;
     public BrokenPartsManager partsManager;
     public EndPanel endPanel;
+    public MainUI mainUi;
 
     public float MinTimeForQuestion;
     public float MaxTimeForQuestion;
@@ -64,6 +77,8 @@ public class GameManager : MonoBehaviour
         State = GameState.Driving;
         firstPlayer.GoInCar();
         secondPlayer.GoInCar();
+        hearts = 3;
+        mainUi.RefreshHearts(hearts,hearts, true);
     }
 
 
@@ -79,6 +94,12 @@ public class GameManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.R))
             {
                 BreakCar();
+                return;
+            }
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                State = GameState.Questions;
+                questionGame.StartNewGame(3f);
                 return;
             }
             
@@ -110,7 +131,7 @@ public class GameManager : MonoBehaviour
     public void ExplodeCar()
     {
         State = GameState.Exploded;
-        endPanel.DoEndAnimation(false, ReloadGame);
+        endPanel.DoEndAnimation(false, ReloadGame, true);
     }
 
     public void Victory(Action callback = null)
@@ -120,9 +141,21 @@ public class GameManager : MonoBehaviour
         endPanel.DoEndAnimation(true, endCallback);
     }
 
+    public void QuestionAnswered(bool isRepaired)
+    {
+        if (isRepaired) Hearts++;
+        else Hearts--;
+    }
+
     public void FinishQuestion()
     {
         Time.timeScale = 1f;
+        if (Hearts == 0)
+        {
+            State = GameState.Exploded;
+            endPanel.DoEndAnimation(false, ReloadGame);
+            return;
+        }
         State = GameState.Driving;
         timeForQuestion = Random.Range(MinTimeForQuestion, MaxTimeForQuestion);
     }

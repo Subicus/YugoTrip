@@ -81,6 +81,7 @@ public class QuestionGame : MonoBehaviour
     };
 
     private Material blurMaterial;
+    private bool repairedRelationship;
 
     #endregion
 
@@ -201,7 +202,8 @@ public class QuestionGame : MonoBehaviour
     public void SetPlayerChoices(int p1, int p2)
     {
         // activate selected ones
-        if (p1 == p2)
+        repairedRelationship = p1 == p2;
+        if (repairedRelationship)
         {
             animator.SetTrigger(AnswersKey[p1]);
         }
@@ -229,6 +231,12 @@ public class QuestionGame : MonoBehaviour
     public void FadeOutBlur()
     {
         StartCoroutine(DoBlurAnimation(false));
+    }
+
+    // from animation
+    public void RefreshHearts()
+    {
+        GameManager.I.QuestionAnswered(repairedRelationship);
     }
 
     #endregion

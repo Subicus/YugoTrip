@@ -37,14 +37,14 @@ public class EndPanel : MonoBehaviour
 
     #region Public
 
-    public void DoEndAnimation(bool isWin, Action endCallback = null)
+    public void DoEndAnimation(bool isWin, Action endCallback = null, bool isDelay = false)
     {
         if (isEnding)
             return;
 
         isEnding = true;
         var text = isWin ? "BRAVO!\nRELATIONSHIP REPAIRED!" : "RELATIONSHIP BROKEN!";
-        var delay = isWin ? 0f : 3f;
+        var delay = isDelay ? 0f : 3f;
         StartCoroutine(DoAnimation(text, isWin, delay, endCallback));
     }
 

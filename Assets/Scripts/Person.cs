@@ -9,6 +9,9 @@ public class Person : MonoBehaviour
     public float speed;
     public bool isFirstPlayer;
     public float minDistanceToYugo;
+
+    public GameObject on;
+    public GameObject ona;
     
     private Rigidbody rb;
 
@@ -24,6 +27,12 @@ public class Person : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         yugo = FindObjectOfType<Driver>();
         partsManager = FindObjectOfType<BrokenPartsManager>();
+    }
+
+    private void Start()
+    {
+        on.SetActive(isFirstPlayer);
+        ona.SetActive(!isFirstPlayer);
     }
 
     private void Update()
